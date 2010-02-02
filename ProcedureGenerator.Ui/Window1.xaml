@@ -1,8 +1,9 @@
 ﻿<Window x:Class="ProcedureGenerator.Ui.Window1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Stored Procedure Generator" Height="502" Width="690" Loaded="Window_Loaded">
-    <Grid Height="462" Width="690">
+    Title="Stored Procedure Generator" Height="502" Width="750" Loaded="Window_Loaded">
+    <DockPanel>
+    <Grid >
         <Grid.Background>
 
             <LinearGradientBrush>
@@ -37,4 +38,5 @@
             <RadioButton Canvas.Left="18.326" Canvas.Top="40.817" Height="15.827" Name="radioButton2" Width="119.952">RadioButton</RadioButton>
         </Canvas>
     </Grid>
+        </DockPanel>
 </Window>
