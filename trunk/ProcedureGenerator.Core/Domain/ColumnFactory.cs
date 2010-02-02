@@ -28,13 +28,17 @@ namespace ProcedureGenerator.Core
                                                                              {"smallmoney",SqlDbType.SmallMoney},
                                                                              {"numeric",SqlDbType.Decimal},
 																									  {"smalldatetime",SqlDbType.SmallDateTime},
-																									  {"ntext",SqlDbType.NText}
+																									  {"ntext",SqlDbType.NText},
+																									  {"float",SqlDbType.Float},
+																									  {"bigint",SqlDbType.BigInt},
+																									  {"Xml",SqlDbType.Xml}
                                                                           };
 
 
       public Column BuildColumn(COLUMN c, IEnumerable<CONSTRAINT_COLUMN_USAGE> foreignKeyList)
-      
       {
+			if (c == null) return null;
+
          Column column = new Column
                                  {
                                     Name = c.COLUMN_NAME,

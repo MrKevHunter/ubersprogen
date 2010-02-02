@@ -141,6 +141,7 @@ namespace ProcedureGenerator.Ui
 											  count++;
 											  worker.ReportProgress(Convert.ToInt32(((decimal)count / total) * 100));
 										  }
+										  worker.ReportProgress(100);
 									  };
 
 			worker.RunWorkerAsync();
