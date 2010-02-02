@@ -52,7 +52,7 @@ namespace ProcedureGenerator.Core.Domain
                                                     on columnConstraint.COLUMN_NAME equals column.COLUMN_NAME
                                                  where tableConstraint.CONSTRAINT_TYPE.Contains("PRIMARY KEY")
                                                        && tableConstraint.TABLE_NAME == tableName
-                                                 select column).First());
+                                                 select column).FirstOrDefault());
       }
 
       private IEnumerable<COLUMN> GetColumns(SchemaDataContext context, string tableName)
