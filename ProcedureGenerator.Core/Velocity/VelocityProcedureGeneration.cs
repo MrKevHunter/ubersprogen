@@ -41,7 +41,7 @@ namespace ProcedureGenerator.Core.Velocity
          _context.Put("owner", _owner);
          _context.Put("now", DateTime.Now.ToLongDateString());
          _context.Put("table", _table);
-
+			
          var writer = new StringWriter();
          velocity.GetTemplate(_path).Merge(_context, writer);
          return writer.GetStringBuilder().ToString();
