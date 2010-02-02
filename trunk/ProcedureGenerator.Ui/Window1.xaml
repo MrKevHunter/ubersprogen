@@ -5,36 +5,24 @@
     <DockPanel>
     <Grid>
         <Grid.Background>
-
             <LinearGradientBrush>
-                
                 <GradientStop Color="#FAFAFAFA" Offset="0"/>
                 <GradientStop Color="#B2171F6E" Offset="0.971"/>
             </LinearGradientBrush>
         </Grid.Background>
-        
-        <StackPanel Orientation="Horizontal" Margin="1,0,0,0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282">
+        <StackPanel Orientation="Horizontal" Margin="1,0,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282">
                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,6,0,0" Name="connectionStrings" VerticalAlignment="Top" Width="182" />
                 <Button Height="23" HorizontalAlignment="Left" Margin="12,6,0,0" Name="loadTables" VerticalAlignment="Top" Width="51" Click="loadTables_Click">Load</Button>
-            </StackPanel>
-        
-        <ListBox ItemsSource="{Binding AvailableTables}" Name="lbTables" Width="249.156" HorizontalAlignment="Left" Margin="12,35,0,65">
-            <ListBox.ItemTemplate>
-                <HierarchicalDataTemplate>
-                    <CheckBox  Content="{Binding TableName  }" IsChecked="{Binding Selected}"/>
-                </HierarchicalDataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Margin="267,12,0,0" Name="canvas1" Height="146" VerticalAlignment="Top" HorizontalAlignment="Left" Width="118">
+        </StackPanel>
+            <StackPanel Margin="267,12,0,0" Name="canvas1" Height="146" VerticalAlignment="Top" HorizontalAlignment="Left" Width="118">
             <CheckBox Canvas.Left="6" Canvas.Top="6" Height="16.67" Name="chkSelect" Width="120.024">Select All</CheckBox>
             <CheckBox Canvas.Left="6" Canvas.Top="28.339" Height="16.67" Name="chkInsert" Width="120.024">Insert</CheckBox>
             <CheckBox Canvas.Left="6" Canvas.Top="50.754" Height="16.918" Name="chkDelete" Width="120.024">Delete</CheckBox>
             <CheckBox Canvas.Left="6" Canvas.Top="73.824" Height="16.918" Name="chkUpdate" Width="120.024">Update</CheckBox>
             <CheckBox Canvas.Left="6" Canvas.Top="96.894" Height="16.918" Name="chkPrimaryKey" Width="120.024">Select By PK</CheckBox>
             <CheckBox Canvas.Left="6" Canvas.Top="119.195" Height="16.918" Name="chkSelectByFk" Width="120.024">Select By FK</CheckBox>
-        </StackPanel>
-        <Button Height="23" HorizontalAlignment="Left" Margin="12,0,0,36" Name="btnSelectAll" VerticalAlignment="Bottom" Width="75" Click="btnSelectAll_Click">SelectAll</Button>
-        <Button Height="23" HorizontalAlignment="Left" Margin="93,0,0,36" Name="btnSelectNone" VerticalAlignment="Bottom" Width="75" Click="btnSelectNone_Click">Select None</Button>
+            </StackPanel>
+        
         <Button HorizontalAlignment="Left" Margin="267,194,0,0" Name="btnGenerate" Width="75" Height="24" VerticalAlignment="Top" Click="btnGenerate_Click">Generate</Button>
         <ProgressBar Margin="12,0,6,12" Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" />
         <TextBox Name="textBox1" Height="22" MouseDoubleClick="textBox1_MouseDoubleClick" Margin="353,164,6,0" VerticalAlignment="Top" />
@@ -43,7 +31,19 @@
             <RadioButton Canvas.Left="18.326" Canvas.Top="19.159" Height="15.827" Name="radioButton1" Width="119.952">RadioButton</RadioButton>
             <RadioButton Canvas.Left="18.326" Canvas.Top="40.817" Height="15.827" Name="radioButton2" Width="119.952">RadioButton</RadioButton>
         </StackPanel>
-            
+            <StackPanel Width="270" Height="190" HorizontalAlignment="Left" Margin="0,0,0,0" Orientation="Vertical">
+                <ListBox ItemsSource="{Binding AvailableTables}" Name="lbTables" Width="249.156" HorizontalAlignment="Left" Margin="10,5,0,0" Height="136">
+                    <ListBox.ItemTemplate>
+                        <HierarchicalDataTemplate>
+                            <CheckBox Content="{Binding TableName  }" IsChecked="{Binding Selected}" />
+                        </HierarchicalDataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Orientation="Horizontal" Height="36">
+                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,10,5" Name="btnSelectAll" VerticalAlignment="Bottom" Width="75" Click="btnSelectAll_Click">SelectAll</Button>
+                    <Button Height="23" HorizontalAlignment="Right"  Margin="10,5,10,5" Name="btnSelectNone" VerticalAlignment="Bottom" Width="75" Click="btnSelectNone_Click">Select None</Button>
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>
