@@ -27,7 +27,8 @@ namespace ProcedureGenerator.Core
                                                                              {"varbinary",SqlDbType.VarBinary},
                                                                              {"smallmoney",SqlDbType.SmallMoney},
                                                                              {"numeric",SqlDbType.Decimal},
-																									  {"smalldatetime",SqlDbType.SmallDateTime}
+																									  {"smalldatetime",SqlDbType.SmallDateTime},
+																									  {"ntext",SqlDbType.NText}
                                                                           };
 
 
