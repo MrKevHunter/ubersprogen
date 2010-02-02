@@ -122,39 +122,41 @@ namespace ProcedureGenerator.Ui
 													  {
 														  progressBar1.Value = args.ProgressPercentage;
 													  }
-													  if (args.ProgressPercentage >= 100)
-													  {
-														  btnGenerate.IsEnabled = true;
-													  }
 												  };
+			worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
 			worker.DoWork += delegate(object s, DoWorkEventArgs args)
 									  {
-										  try
+										  if (worker.CancellationPending)
 										  {
-
-											  if (worker.CancellationPending)
-											  {
-												  args.Cancel = true;
-												  return;
-											  }
-											  List<TablesPresentation> tablesPresentations =
-												  AvailableTables.Where(presentation => presentation.Selected).ToList();
-											  int total = tablesPresentations.Count;
-											  int count = 0;
-											  foreach (TablesPresentation tablesPresentation in tablesPresentations)
-											  {
-												  Generate(tablesPresentation, p);
-												  count++;
-												  worker.ReportProgress(Convert.ToInt32(((decimal)count / total) * 100));
-											  }
+											  args.Cancel = true;
+											  return;
 										  }
-										  finally
+										  List<TablesPresentation> tablesPresentations =
+											  AvailableTables.Where(presentation => presentation.Selected).ToList();
+										  int total = tablesPresentations.Count;
+										  int count = 0;
+										  foreach (TablesPresentation tablesPresentation in tablesPresentations)
 										  {
-											  worker.ReportProgress(int.MaxValue);
+											  Generate(tablesPresentation, p);
+											  count++;
+											  worker.ReportProgress(Convert.ToInt32(((decimal)count / total) * 100));
 										  }
 									  };
 
 			worker.RunWorkerAsync();
+		}
+
+		void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			btnGenerate.IsEnabled = true;
+			try
+			{
+				object result = e.Result;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.InnerException.ToString());
+			}
 		}
 
 		private void Generate(TablesPresentation tablesPresentation, Procedures procedures)
