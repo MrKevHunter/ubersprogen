@@ -40,13 +40,14 @@ namespace ProcedureGenerator.Ui
 			}
 		}
 
+		private string connectionString;
 		private void LoadTableList()
 		{
 			lbTables.ItemsSource = null;
 			try
 			{
 				Cursor = Cursors.Wait;
-				string connectionString = ConfigurationManager.ConnectionStrings[connectionStrings.SelectedValue.ToString()].ConnectionString;
+				connectionString = ConfigurationManager.ConnectionStrings[connectionStrings.SelectedValue.ToString()].ConnectionString;
 				var schemaDataContext = new SchemaDataContext(connectionString);
 				foreach (
 					TABLE table in
@@ -101,6 +102,7 @@ namespace ProcedureGenerator.Ui
 
 		private void btnGenerate_Click(object sender, RoutedEventArgs e)
 		{
+			btnGenerate.IsEnabled = false;
 			worker.WorkerReportsProgress = true;
 			OutputPath = textBox1.Text;
 			Procedures p = new Procedures()
@@ -113,27 +115,42 @@ namespace ProcedureGenerator.Ui
 										Update = (bool)chkUpdate.IsChecked
 									};
 
+			progressBar1.Maximum = 100;
 			worker.ProgressChanged += delegate(object o, ProgressChangedEventArgs args)
 												  {
-													  progressBar1.Maximum = 100;
-													  progressBar1.Value = args.ProgressPercentage;
+													  if (args.ProgressPercentage < progressBar1.Maximum)
+													  {
+														  progressBar1.Value = args.ProgressPercentage;
+													  }
+													  if (args.ProgressPercentage >= 100)
+													  {
+														  btnGenerate.IsEnabled = true;
+													  }
 												  };
 			worker.DoWork += delegate(object s, DoWorkEventArgs args)
 									  {
-										  if (worker.CancellationPending)
+										  try
 										  {
-											  args.Cancel = true;
-											  return;
+
+											  if (worker.CancellationPending)
+											  {
+												  args.Cancel = true;
+												  return;
+											  }
+											  List<TablesPresentation> tablesPresentations =
+												  AvailableTables.Where(presentation => presentation.Selected).ToList();
+											  int total = tablesPresentations.Count;
+											  int count = 0;
+											  foreach (TablesPresentation tablesPresentation in tablesPresentations)
+											  {
+												  Generate(tablesPresentation, p);
+												  count++;
+												  worker.ReportProgress(Convert.ToInt32(((decimal)count / total) * 100));
+											  }
 										  }
-										  List<TablesPresentation> tablesPresentations =
-											  AvailableTables.Where(presentation => presentation.Selected).ToList();
-										  int total = tablesPresentations.Count;
-										  int count = 0;
-										  foreach (TablesPresentation tablesPresentation in tablesPresentations)
+										  finally
 										  {
-											  Generate(tablesPresentation, p);
-											  count++;
-											  worker.ReportProgress(Convert.ToInt32(((decimal)count / total) * 100));
+											  worker.ReportProgress(int.MaxValue);
 										  }
 									  };
 
@@ -142,7 +159,7 @@ namespace ProcedureGenerator.Ui
 
 		private void Generate(TablesPresentation tablesPresentation, Procedures procedures)
 		{
-			Table table = new TableBuilder().BuildMeATableFromThis(new SchemaDataContext(), tablesPresentation.TableName);
+			Table table = new TableBuilder().BuildMeATableFromThis(new SchemaDataContext(connectionString), tablesPresentation.TableName);
 			if (procedures.Delete)
 				BuildAndWrite(table, new DeleteProcedure());
 
