@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -27,14 +28,26 @@ namespace ProcedureGenerator.Ui
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			//LoadTableList();
+			LoadConnectionStrings();
+		}
+
+		private void LoadConnectionStrings()
+		{
+			connectionStrings.Items.Clear();
+			foreach (ConnectionStringSettings connectionString in ConfigurationManager.ConnectionStrings)
+			{
+				connectionStrings.Items.Add(connectionString.Name);
+			}
 		}
 
 		private void LoadTableList()
 		{
+			lbTables.ItemsSource = null;
 			try
 			{
-				var schemaDataContext = new SchemaDataContext();
+				Cursor = Cursors.Wait;
+				string connectionString = ConfigurationManager.ConnectionStrings[connectionStrings.SelectedValue.ToString()].ConnectionString;
+				var schemaDataContext = new SchemaDataContext(connectionString);
 				foreach (
 					TABLE table in
 						schemaDataContext.TABLEs.Where(table => table.TABLE_TYPE == "BASE TABLE").OrderBy(
@@ -47,6 +60,10 @@ namespace ProcedureGenerator.Ui
 			catch (Exception exception)
 			{
 				MessageBox.Show(exception.Message, "Failed to load the list of table names");
+			}
+			finally
+			{
+				Cursor = Cursors.Arrow;
 			}
 		}
 
@@ -157,6 +174,11 @@ namespace ProcedureGenerator.Ui
 		{
 			Procedure procedure = generator.Generate(table);
 			File.WriteAllText(Path.Combine(OutputPath, procedure.FileName), procedure.Body);
+		}
+
+		private void loadTables_Click(object sender, RoutedEventArgs e)
+		{
+			LoadTableList();
 		}
 	}
 }
