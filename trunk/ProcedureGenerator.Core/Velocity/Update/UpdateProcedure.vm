@@ -6,16 +6,16 @@ CREATE PROCEDURE $owner.$procedureName
 	@$i $i.ColumnType$i.Length #if($table.NumberOfColumns != $counter ) , #end
 	#set ($counter = $counter + 1) 
 #end
-
+#set ($counter = 1)
 
 	)
 AS
 UPDATE $table
 SET
 #foreach($i in $table.NonIdentityColumns)
-#each
-	$i = @$i
-#between
-,
+
+	$i = @$i#if($table.NumberOfColumns != $counter ),#end
+	#set ($counter = $counter + 1) 
 	#end
-WHERE $table.PrimaryKey = @$table.PrimaryKey
+
+	WHERE $table.PrimaryKey = @$table.PrimaryKey
