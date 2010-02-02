@@ -20,6 +20,13 @@ namespace ProcedureGenerator.Core.Domain
 			get { return Columns.Count(); }
 		}
 
+		public int NumberOfNonIdentityColumns
+		{
+			get
+			{
+				return NonIdentityColumns.Count();
+			}
+		}
 
 		public IEnumerable<Column> NonIdentityColumns
 		{
