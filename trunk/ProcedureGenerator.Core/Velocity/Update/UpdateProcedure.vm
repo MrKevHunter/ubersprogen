@@ -1,12 +1,13 @@
-﻿CREATE PROCEDURE $owner.$procedureName 
+﻿#set ($counter = 1)
+CREATE PROCEDURE $owner.$procedureName 
 (
 #foreach($i in $table.NonIdentityColumns)
-#each
-	@$i $i.ColumnType $i.Length
-#between
-,
-	#end
-	
+
+	@$i $i.ColumnType$i.Length #if($table.NumberOfColumns != $counter ) , #end
+	#set ($counter = $counter + 1) 
+#end
+
+
 	)
 AS
 UPDATE $table
