@@ -1,0 +1,30 @@
+﻿CREATE PROCEDURE $owner.$procedureName 
+(
+#foreach($i in $table.NonIdentityColumns)
+#each
+	@$i $i.ColumnType $i.Length
+#between
+,
+	#end
+	
+	)
+AS
+	INSERT INTO $table.Schema.$table
+(
+#foreach($i in $table.NonIdentityColumns)
+#each
+	$i
+#between
+,
+	#end
+)
+VALUES
+(
+#foreach($i in $table.NonIdentityColumns)
+#each
+	@$i
+#between	
+	,
+	#end
+)
+GO

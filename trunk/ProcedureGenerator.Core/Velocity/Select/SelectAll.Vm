@@ -1,0 +1,12 @@
+﻿CREATE PROCEDURE $owner.$procedureName
+AS
+	SELECT 
+#foreach($i in $table.Columns)
+#each
+	$i
+#between
+	,
+	#end
+	FROM $table.Schema.$table
+	
+GO

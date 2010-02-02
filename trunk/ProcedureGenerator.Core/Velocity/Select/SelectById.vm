@@ -1,0 +1,13 @@
+﻿CREATE PROCEDURE $owner.$procedureName (@primaryKey as $table.PrimaryKey.ColumnType)
+AS
+	SELECT 
+#foreach($i in $table.Columns)
+#each
+	$i
+#between
+	,
+	#end
+	FROM $table.Schema.$table
+	WHERE $table.PrimaryKey = @primaryKey
+
+GO

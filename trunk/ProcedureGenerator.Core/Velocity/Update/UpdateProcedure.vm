@@ -1,0 +1,20 @@
+﻿CREATE PROCEDURE $owner.$procedureName 
+(
+#foreach($i in $table.NonIdentityColumns)
+#each
+	@$i $i.ColumnType $i.Length
+#between
+,
+	#end
+	
+	)
+AS
+UPDATE $table
+SET
+#foreach($i in $table.NonIdentityColumns)
+#each
+	$i = @$i
+#between
+,
+	#end
+WHERE $table.PrimaryKey = @$table.PrimaryKey

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Schema">
+  <DataContextMoniker Name="/SchemaDataContext" />
+  <nestedChildShapes>
+    <classShape Id="eecda268-f552-4e15-8801-5a1914368ff1" absoluteBounds="2.875, 0.5, 2, 5.2323225911458326">
+      <DataClassMoniker Name="/SchemaDataContext/COLUMN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc3aeed4-56ec-4cbe-8650-aac1d5543eb4" absoluteBounds="2.89, 0.96, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d0727433-b4ee-4281-a12f-a9a377021db6" absoluteBounds="5.25, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/SchemaDataContext/CONSTRAINT_COLUMN_USAGE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b4f9fe23-bccc-4920-80a3-3822eeabe060" absoluteBounds="5.265, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="60d0d16d-68f4-4638-a76b-f41cba33123d" absoluteBounds="0.5, 1.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/SchemaDataContext/REFERENTIAL_CONSTRAINT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fbdd100e-0134-4cf8-841a-2ca88e8fafe6" absoluteBounds="0.515, 1.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e46925e4-399d-47c3-b9a4-e1919f3abfe0" absoluteBounds="0.75, 4.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/SchemaDataContext/VIEW" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1c8e6d87-3ae2-40ca-8324-a1bf847f6886" absoluteBounds="0.765, 5.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6e6c3ae1-7c36-4b8d-bb0a-e4aaba465403" absoluteBounds="5.875, 3.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/SchemaDataContext/TABLE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="39147994-1ddd-4985-8657-9895361e626f" absoluteBounds="5.89, 3.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

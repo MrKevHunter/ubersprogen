@@ -1,0 +1,4 @@
+﻿CREATE PROCEDURE $owner.$procedureName (@primaryKey as $table.PrimaryKey.ColumnType  $table.PrimaryKey.Length)
+AS
+	DELETE FROM $table.Schema.$table WHERE $table.PrimaryKey = @primaryKey
+GO
