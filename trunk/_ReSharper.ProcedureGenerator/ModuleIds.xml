@@ -1,6 +1,0 @@
-<Modules>
-  <Module PersistentId="A0D89CB8-31B7-45D7-8892-769BA71D8FD7" ModuleId="ProcedureGenerator.Core" />
-  <Module PersistentId="5650EABE-0BAB-4A64-A237-4E4DB681ACB4" ModuleId="ProcedureGenerator.Integration" />
-  <Module PersistentId="9A8FD6A0-0016-4F50-81F9-FC1EFA68F354" ModuleId="ProcedureGenerator.Tests" />
-  <Module PersistentId="B5DB5D57-E9DF-409A-BE4F-4AB6730F60FA" ModuleId="ProcedureGenerator.Ui" />
-</Modules>
