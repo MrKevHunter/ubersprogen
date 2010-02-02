@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Domain\Column.cs" />
     <Compile Include="Domain\ColumnFactory.cs" />
-    <Compile Include="Domain\ForeignKey.cs" />
     <Compile Include="Domain\Procedure.cs" />
     <Compile Include="Exceptions\UnMappedSqlTypeException.cs" />
     <Compile Include="ProcedureGenerators\DeleteProcedure.cs" />
