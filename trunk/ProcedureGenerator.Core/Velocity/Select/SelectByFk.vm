@@ -1,11 +1,11 @@
 ﻿CREATE PROCEDURE $owner.$procedureName (@$key as $key.ColumnType)
 AS
 	SELECT 
+		#set ($counter = 1)
 #foreach($i in $table.Columns)
-#each
-	$i
-#between
-	,
+	$i#if($table.NumberOfColumns != $counter ), #end
+	
+	#set ($counter = $counter + 1) 
 	#end
 	FROM $table.Schema.$table
 	WHERE $key = @$key
