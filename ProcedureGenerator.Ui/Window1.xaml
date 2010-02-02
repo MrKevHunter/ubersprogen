@@ -33,7 +33,7 @@
         <TextBox Name="textBox1" Height="22" MouseDoubleClick="textBox1_MouseDoubleClick" Margin="352.742,164,33.32,0" VerticalAlignment="Top" />
         <TextBlock Height="21" Margin="267,167,344,0" Name="textBlock1" VerticalAlignment="Top" Text="Output Folder" />
         <Canvas Height="78.141" HorizontalAlignment="Right" Margin="0,11.647,139,0" Name="canvas2" VerticalAlignment="Top" Width="162.435">
-            <RadioButton Canvas.Left="18.326" Canvas.Top="19.159" Height="15.827" Name="radioButton1" Width="119.952" Checked="radioButton1_Checked">RadioButton</RadioButton>
+            <RadioButton Canvas.Left="18.326" Canvas.Top="19.159" Height="15.827" Name="radioButton1" Width="119.952">RadioButton</RadioButton>
             <RadioButton Canvas.Left="18.326" Canvas.Top="40.817" Height="15.827" Name="radioButton2" Width="119.952">RadioButton</RadioButton>
         </Canvas>
     </Grid>
