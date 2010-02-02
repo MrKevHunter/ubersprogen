@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[ProcedureGenerator.Tests.csproj]
+SCC_Aux_Path = "D:\SourceControl"
+SCC_Project_Name = "$/ProcedureGenerator/ProcedureGenerator/ProcedureGenerator.Tests", NBAAAAAA
