@@ -39,9 +39,9 @@
                         </HierarchicalDataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <StackPanel Orientation="Horizontal" Height="36">
-                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,10,5" Name="btnSelectAll" VerticalAlignment="Bottom" Width="75" Click="btnSelectAll_Click">SelectAll</Button>
-                    <Button Height="23" HorizontalAlignment="Right"  Margin="10,5,10,5" Name="btnSelectNone" VerticalAlignment="Bottom" Width="75" Click="btnSelectNone_Click">Select None</Button>
+                <StackPanel Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" Name="btnSelectAll" VerticalAlignment="Center"  Width="74" Click="btnSelectAll_Click">SelectAll</Button>
+                    <Button Height="23"  Margin="45,5,10,5" Name="btnSelectNone" VerticalAlignment="Center"   Width="80" Click="btnSelectNone_Click" HorizontalAlignment="Right">Select None</Button>
                 </StackPanel>
             </StackPanel>
         </Grid>
