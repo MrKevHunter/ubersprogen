@@ -1,49 +1,79 @@
 ﻿<Window x:Class="ProcedureGenerator.Ui.Window1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Stored Procedure Generator" Height="292" Width="715" Loaded="Window_Loaded" MinHeight="292" MinWidth="715">
-    <DockPanel>
-    <Grid>
-        <Grid.Background>
+    Title="Stored Procedure Generator" Loaded="Window_Loaded" MinHeight="292" MinWidth="715" Height="302">
+    <DockPanel HorizontalAlignment="Stretch" >
+        <DockPanel.Background>
             <LinearGradientBrush>
                 <GradientStop Color="#FAFAFAFA" Offset="0"/>
                 <GradientStop Color="#B2171F6E" Offset="0.971"/>
             </LinearGradientBrush>
-        </Grid.Background>
-        <StackPanel Orientation="Horizontal" Margin="1,0,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282">
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,6,0,0" Name="connectionStrings" VerticalAlignment="Top" Width="182" />
-                <Button Height="23" HorizontalAlignment="Left" Margin="12,6,0,0" Name="loadTables" VerticalAlignment="Top" Width="51" Click="loadTables_Click">Load</Button>
-        </StackPanel>
-            <StackPanel Margin="267,12,0,0" Name="canvas1" Height="146" VerticalAlignment="Top" HorizontalAlignment="Left" Width="118">
-            <CheckBox Canvas.Left="6" Canvas.Top="6" Height="16.67" Name="chkSelect" Width="120.024">Select All</CheckBox>
-            <CheckBox Canvas.Left="6" Canvas.Top="28.339" Height="16.67" Name="chkInsert" Width="120.024">Insert</CheckBox>
-            <CheckBox Canvas.Left="6" Canvas.Top="50.754" Height="16.918" Name="chkDelete" Width="120.024">Delete</CheckBox>
-            <CheckBox Canvas.Left="6" Canvas.Top="73.824" Height="16.918" Name="chkUpdate" Width="120.024">Update</CheckBox>
-            <CheckBox Canvas.Left="6" Canvas.Top="96.894" Height="16.918" Name="chkPrimaryKey" Width="120.024">Select By PK</CheckBox>
-            <CheckBox Canvas.Left="6" Canvas.Top="119.195" Height="16.918" Name="chkSelectByFk" Width="120.024">Select By FK</CheckBox>
-            </StackPanel>
-        
-        <Button HorizontalAlignment="Left" Margin="267,194,0,0" Name="btnGenerate" Width="75" Height="24" VerticalAlignment="Top" Click="btnGenerate_Click">Generate</Button>
-        <ProgressBar Margin="12,0,6,12" Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" />
-        <TextBox Name="textBox1" Height="22" MouseDoubleClick="textBox1_MouseDoubleClick" Margin="353,164,6,0" VerticalAlignment="Top" />
-        <TextBlock Height="21" Margin="267,167,0,0" Name="textBlock1" VerticalAlignment="Top" Text="Output Folder" HorizontalAlignment="Left" Width="82" />
-        <StackPanel Height="42" HorizontalAlignment="Right" Margin="0,11.647,139,0" Name="canvas2" VerticalAlignment="Top" Width="162.435">
-            <RadioButton Canvas.Left="18.326" Canvas.Top="19.159" Height="15.827" Name="radioButton1" Width="119.952">RadioButton</RadioButton>
-            <RadioButton Canvas.Left="18.326" Canvas.Top="40.817" Height="15.827" Name="radioButton2" Width="119.952">RadioButton</RadioButton>
-        </StackPanel>
-            <StackPanel Width="270" Height="190" HorizontalAlignment="Left" Margin="0,0,0,0" Orientation="Vertical">
-                <ListBox ItemsSource="{Binding AvailableTables}" Name="lbTables" Width="249.156" HorizontalAlignment="Left" Margin="10,5,0,0" Height="136">
+        </DockPanel.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0"  HorizontalAlignment="Left" Margin="0,0,0,0">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="1,0,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                    <ComboBox DockPanel.Dock="Right" Height="23" MinWidth="200" MaxWidth="200"   HorizontalAlignment="Left" Margin="5,6,0,0" x:Name="connectionStrings" VerticalAlignment="Top"  />
+                    <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="loadTables" VerticalAlignment="Top" Padding="10,2" Click="loadTables_Click" Content="Load"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,3"  Click="btnSelectAll_Click" Content="Select All"/>
+                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,3" Click="btnSelectNone_Click" HorizontalAlignment="Right" Content="Select None"/>
+                </StackPanel>
+                <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AvailableTables}" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
-                            <CheckBox Content="{Binding TableName  }" IsChecked="{Binding Selected}" />
+                            <CheckBox Content="{Binding TableName}" IsChecked="{Binding Selected}" />
                         </HierarchicalDataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <StackPanel Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" Name="btnSelectAll" VerticalAlignment="Center"  Width="74" Click="btnSelectAll_Click">SelectAll</Button>
-                    <Button Height="23"  Margin="45,5,10,5" Name="btnSelectNone" VerticalAlignment="Center"   Width="80" Click="btnSelectNone_Click" HorizontalAlignment="Right">Select None</Button>
-                </StackPanel>
-            </StackPanel>
+
+            </DockPanel>
+            <Border  Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="12.304*"/>
+                        <RowDefinition Height="8.049*" />
+                        <RowDefinition Height="93.967*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel   x:Name="stkProcedureSelection"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+                                <CheckBox x:Name="chkSelect"  Content="Select All"/>
+                                <CheckBox  x:Name="chkInsert"  Content="Insert"/>
+                                <CheckBox  x:Name="chkDelete"  Content="Delete"/>
+                                <CheckBox  x:Name="chkUpdate"  Content="Update"/>
+                                <CheckBox  x:Name="chkPrimaryKey"  Content="Select By PK"/>
+                                <CheckBox  x:Name="chkSelectByFk" Content="Select By FK"/>
+                            </StackPanel>
+                            <StackPanel   HorizontalAlignment="Right"  x:Name="canvas2" VerticalAlignment="Top">
+                                <RadioButton  x:Name="radioButton1"  Content="RadioButton"/>
+                                <RadioButton  x:Name="radioButton2"  Content="RadioButton"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1">
+                        <DockPanel>
+                            <TextBlock  x:Name="textBlock1" VerticalAlignment="Center"  Text="Output Folder" HorizontalAlignment="Left" Padding="0,0,10,0"  />
+                            <TextBox x:Name="textBox1"  MouseDoubleClick="textBox1_MouseDoubleClick"  />
+                        </DockPanel>
+                    </Border>
+                    <Border Grid.Row="2">
+                        <Button  HorizontalAlignment="Right"  Padding="5,2" x:Name="btnGenerate" VerticalAlignment="Top" Click="btnGenerate_Click" Content="Generate"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.RowSpan="2">
+                        <ProgressBar x:Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" />
+
+                    </Border>
+                </Grid>
+            </Border>
         </Grid>
     </DockPanel>
 </Window>
