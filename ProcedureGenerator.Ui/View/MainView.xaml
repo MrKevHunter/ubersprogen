@@ -1,6 +1,10 @@
 ﻿<Window x:Class="ProcedureGenerator.Ui.View.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Ui="clr-namespace:ProcedureGenerator.Ui" Title="Stored Procedure Generator" Loaded="Window_Loaded" MinHeight="292" MinWidth="715" Height="302">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Ui="clr-namespace:ProcedureGenerator.Ui" Title="Stored Procedure Generator"  MinHeight="292" MinWidth="715" Height="302">
+    <Window.Resources>
+        <ResourceDictionary Source="../MainViewResourceDictionary.xaml" />
+    </Window.Resources>
     <DockPanel HorizontalAlignment="Stretch" >
         <DockPanel.Background>
             <LinearGradientBrush>
@@ -16,14 +20,15 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0"  HorizontalAlignment="Left" Margin="0,0,0,0">
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="1,0,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" >
-                    <ComboBox DockPanel.Dock="Right" Height="23" MinWidth="200" MaxWidth="200"   HorizontalAlignment="Left" Margin="5,6,0,0" x:Name="connectionStrings" VerticalAlignment="Top"  />
-                    <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="loadTables" VerticalAlignment="Top" Padding="10,2" Click="loadTables_Click" Content="Load"/>
+                    <ComboBox DockPanel.Dock="Right" Height="23" MinWidth="200" MaxWidth="200"   HorizontalAlignment="Left" Margin="5,6,0,0" x:Name="connectionStrings" VerticalAlignment="Top" SelectedValue="{Binding ConnectionStringKey}" ItemsSource="{Binding ConnectionStrings}"  />
+                    <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="btnLoadTables" VerticalAlignment="Top" Padding="10,2" Content="Load"/>
+                    
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,3"  Click="btnSelectAll_Click" Content="Select All"/>
-                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,3" Click="btnSelectNone_Click" HorizontalAlignment="Right" Content="Select None"/>
+                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,3"   Content="Select All"/>
+                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,3"  HorizontalAlignment="Right" Content="Select None"/>
                 </StackPanel>
-                <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AvailableTables}" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
+                <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding Tables}" IsSynchronizedWithCurrentItem="True" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
                             <Ui:TableCheckBoxItem />
@@ -50,32 +55,32 @@
                         <StackPanel Orientation="Horizontal">
 
                             <StackPanel   x:Name="stkProcedureSelection"  VerticalAlignment="Top" HorizontalAlignment="Left" >
-                                <CheckBox x:Name="chkSelect"  Content="Select All"/>
-                                <CheckBox  x:Name="chkInsert"  Content="Insert"/>
-                                <CheckBox  x:Name="chkDelete"  Content="Delete"/>
-                                <CheckBox  x:Name="chkUpdate"  Content="Update"/>
-                                <CheckBox  x:Name="chkPrimaryKey"  Content="Select By PK"/>
-                                <CheckBox  x:Name="chkSelectByFk" Content="Select By FK"/>
+                                <CheckBox x:Name="chkSelect"  Content="Select All" IsChecked="{Binding Select}"/>
+                                <CheckBox  x:Name="chkInsert"  Content="Insert" IsChecked="{Binding Insert}"/>
+                                <CheckBox  x:Name="chkDelete"  Content="Delete" IsChecked="{Binding Delete}"/>
+                                <CheckBox  x:Name="chkUpdate"  Content="Update" IsChecked="{Binding Update}"/>
+                                <CheckBox  x:Name="chkPrimaryKey"  Content="Select By PK" IsChecked="{Binding SelectById}"/>
+                                <CheckBox  x:Name="chkSelectByFk" Content="Select By FK" IsChecked="{Binding SelectByFk}"/>
                             </StackPanel>
 
                             <StackPanel   HorizontalAlignment="Right"  x:Name="canvas2" VerticalAlignment="Top">
-                                <RadioButton  x:Name="radioButton1"  Content="Single File"/>
-                                <RadioButton  x:Name="radioButton2"  Content="Multiple Files"/>
+                                <RadioButton  x:Name="rdoSingleFile"  Content="Single File"/>
+                                <RadioButton  x:Name="rdoMultipleFiles"  Content="Multiple Files"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
                     <Border Grid.Row="1">
                         <DockPanel>
                             <TextBlock  x:Name="textBlock1" VerticalAlignment="Center"  Text="Output Folder" HorizontalAlignment="Left" Padding="0,0,10,0"  />
-                            <TextBox x:Name="textBox1"  MouseDoubleClick="textBox1_MouseDoubleClick"  />
+                            <TextBox x:Name="textBox1" Text="{Binding OutputPath}"  />
                         </DockPanel>
                     </Border>
                     <Border Grid.Row="2">
-                        <Button  HorizontalAlignment="Right"  Padding="5,2" x:Name="btnGenerate" VerticalAlignment="Top" Click="btnGenerate_Click" Content="Generate"/>
+                        <Button  HorizontalAlignment="Right"  Padding="5,2" x:Name="btnGenerate" VerticalAlignment="Top"  Content="Generate"/>
                     </Border>
                     <Border Grid.Row="3" Grid.RowSpan="2">
                         <DockPanel>
-                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="Hidden" />
+                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="{Binding InProgress}" Value="{Binding ProgressPercentage}" />
                         </DockPanel>
                     </Border>
                 </Grid>
