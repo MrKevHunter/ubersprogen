@@ -5,5 +5,7 @@ namespace ProcedureGenerator.Ui
       public bool Selected { get; set;}
 
       public string TableName { get; set;}
+
+		public bool HasPrimaryKey { get; set;}
    }
 }
