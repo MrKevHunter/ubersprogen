@@ -64,6 +64,7 @@
     <Compile Include="Domain\ColumnFactory.cs" />
     <Compile Include="Domain\Procedure.cs" />
     <Compile Include="Exceptions\UnMappedSqlTypeException.cs" />
+    <Compile Include="Extensions\Class1.cs" />
     <Compile Include="ProcedureGenerators\DeleteProcedure.cs" />
     <Compile Include="ProcedureGenerators\ForeignKeyProcedure.cs" />
     <Compile Include="ProcedureGenerators\GenerateProcedureBase.cs" />

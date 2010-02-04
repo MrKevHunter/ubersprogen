@@ -20,9 +20,9 @@
                     <ComboBox DockPanel.Dock="Right" Height="23" MinWidth="200" MaxWidth="200"   HorizontalAlignment="Left" Margin="5,6,0,0" x:Name="connectionStrings" VerticalAlignment="Top"  />
                     <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="loadTables" VerticalAlignment="Top" Padding="10,2" Click="loadTables_Click" Content="Load"/>
                 </StackPanel>
-                <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,3"  Click="btnSelectAll_Click" Content="Select All"/>
-                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,3" Click="btnSelectNone_Click" HorizontalAlignment="Right" Content="Select None"/>
+                <StackPanel DockPanel.Dock="Bottom" Height="40" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,0"  Click="btnSelectAll_Click" Content="Select All"/>
+                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,0" Click="btnSelectNone_Click" HorizontalAlignment="Right" Content="Select None"/>
                 </StackPanel>
                 <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AvailableTables}" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
                     <ListBox.ItemTemplate>
