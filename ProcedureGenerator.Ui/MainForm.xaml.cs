@@ -19,7 +19,7 @@ namespace ProcedureGenerator.Ui
 	/// </summary>
 	public partial class MainForm : Window
 	{
-		private ObservableCollection<TablesPresentation> AvailableTables = new ObservableCollection<TablesPresentation>();
+		private ObservableCollection<TableDto> AvailableTables = new ObservableCollection<TableDto>();
 		private BackgroundWorker worker = new BackgroundWorker();
 		private string OutputPath;
 		public MainForm()
@@ -55,7 +55,7 @@ namespace ProcedureGenerator.Ui
 						schemaDataContext.TABLEs.Where(table => table.TABLE_TYPE == "BASE TABLE").OrderBy(
 							table1 => table1.TABLE_NAME))
 				{
-					AvailableTables.Add(new TablesPresentation() { Selected = true, TableName = table.TABLE_NAME,HasPrimaryKey = false, HasForeignKey = true});
+					AvailableTables.Add(new TableDto() { Selected = true, TableName = table.TABLE_NAME,HasPrimaryKey = false, HasForeignKey = true});
 				}
 				lbTables.ItemsSource = AvailableTables;
 			}
@@ -71,7 +71,7 @@ namespace ProcedureGenerator.Ui
 
 		private void btnSelectAll_Click(object sender, RoutedEventArgs e)
 		{
-			foreach (TablesPresentation tablesPresentation in AvailableTables)
+			foreach (TableDto tablesPresentation in AvailableTables)
 			{
 				tablesPresentation.Selected = true;
 			}
@@ -81,7 +81,7 @@ namespace ProcedureGenerator.Ui
 		{
 			foreach (object item in lbTables.ItemsSource)
 			{
-				((TablesPresentation)item).Selected = false;
+				((TableDto)item).Selected = false;
 			}
 		}
 
@@ -104,6 +104,7 @@ namespace ProcedureGenerator.Ui
 		private void btnGenerate_Click(object sender, RoutedEventArgs e)
 		{
 			btnGenerate.IsEnabled = false;
+			progBar.Visibility = Visibility.Visible;
 			worker.WorkerReportsProgress = true;
 			OutputPath = textBox1.Text;
 			Procedures p = new Procedures()
@@ -116,12 +117,12 @@ namespace ProcedureGenerator.Ui
 										Update = (bool)chkUpdate.IsChecked
 									};
 
-			progressBar1.Maximum = 100;
+			progBar.Maximum = 100;
 			worker.ProgressChanged += delegate(object o, ProgressChangedEventArgs args)
 												  {
-													  if (args.ProgressPercentage < progressBar1.Maximum)
+													  if (args.ProgressPercentage < progBar.Maximum)
 													  {
-														  progressBar1.Value = args.ProgressPercentage;
+														  progBar.Value = args.ProgressPercentage;
 													  }
 												  };
 			worker.RunWorkerCompleted += WorkerCompleted;
@@ -132,11 +133,11 @@ namespace ProcedureGenerator.Ui
 											  args.Cancel = true;
 											  return;
 										  }
-										  List<TablesPresentation> tablesPresentations =
+										  List<TableDto> tablesPresentations =
 											  AvailableTables.Where(presentation => presentation.Selected).ToList();
 										  int total = tablesPresentations.Count;
 										  int count = 0;
-										  foreach (TablesPresentation tablesPresentation in tablesPresentations)
+										  foreach (TableDto tablesPresentation in tablesPresentations)
 										  {
 											  Generate(tablesPresentation, p);
 											  count++;
@@ -159,9 +160,13 @@ namespace ProcedureGenerator.Ui
 			{
 				MessageBox.Show(ex.GetInnermostException().ToString());
 			}
+			finally
+			{
+			progBar.Visibility = Visibility.Hidden;	
+			}
 		}
 
-		private void Generate(TablesPresentation tablesPresentation, Procedures procedures)
+		private void Generate(TableDto tablesPresentation, Procedures procedures)
 		{
 			Table table = new TableBuilder().BuildMeATableFromThis(new SchemaDataContext(connectionString), tablesPresentation.TableName);
 			if (procedures.Delete)

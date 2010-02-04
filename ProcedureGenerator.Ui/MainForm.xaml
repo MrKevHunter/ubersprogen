@@ -26,10 +26,7 @@
                 <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AvailableTables}" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
-                            <!--<CheckBox Content="{Binding TableName}" IsChecked="{Binding Selected}" />-->
                             <Ui:TableCheckBoxItem />
-                                
-                          
                         </HierarchicalDataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ToolTip>
@@ -78,7 +75,7 @@
                     </Border>
                     <Border Grid.Row="3" Grid.RowSpan="2">
                         <DockPanel>
-                            <ProgressBar DockPanel.Dock="Top" x:Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" />
+                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="Hidden" />
                         </DockPanel>
                     </Border>
                 </Grid>

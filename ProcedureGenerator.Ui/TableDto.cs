@@ -1,6 +1,6 @@
 namespace ProcedureGenerator.Ui
 {
-	public class TablesPresentation
+	public class TableDto
 	{
 		public bool Selected { get; set; }
 
