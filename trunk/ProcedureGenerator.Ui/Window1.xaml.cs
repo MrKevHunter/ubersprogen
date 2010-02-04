@@ -123,7 +123,7 @@ namespace ProcedureGenerator.Ui
 														  progressBar1.Value = args.ProgressPercentage;
 													  }
 												  };
-			worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+			worker.RunWorkerCompleted += worker_RunWorkerCompleted;
 			worker.DoWork += delegate(object s, DoWorkEventArgs args)
 									  {
 										  if (worker.CancellationPending)
