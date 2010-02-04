@@ -1,4 +1,4 @@
-﻿<Window x:Class="ProcedureGenerator.Ui.Window1"
+﻿<Window x:Class="ProcedureGenerator.Ui.MainForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Ui="clr-namespace:ProcedureGenerator.Ui" Title="Stored Procedure Generator" Loaded="Window_Loaded" MinHeight="292" MinWidth="715" Height="302">
     <DockPanel HorizontalAlignment="Stretch" >
