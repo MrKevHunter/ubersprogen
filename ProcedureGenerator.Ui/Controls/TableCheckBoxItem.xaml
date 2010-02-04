@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="ProcedureGenerator.Ui.TableCheckBoxItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Ui="clr-namespace:ProcedureGenerator.Ui">
+	<UserControl.Resources>
+		<Ui:BoolToVisibleConvertor x:Key="boolToVisibleConvertor" />
+	</UserControl.Resources>
+	<StackPanel Orientation="Horizontal">
+        <CheckBox Content="{Binding TableName}" IsChecked="{Binding IsSelected}"  />
+        <Image Visibility="{Binding Path=HasPrimaryKey, 
+                        Converter={StaticResource boolToVisibleConvertor}}" Source="/Images/primarykey.png" HorizontalAlignment="Right" />
+        <Image Visibility="{Binding Path=HasForeignKey, 
+                        Converter={StaticResource boolToVisibleConvertor}}" Source="/Images/ForeignKey.png" HorizontalAlignment="Right"/>
+        
+    </StackPanel>
+</UserControl>

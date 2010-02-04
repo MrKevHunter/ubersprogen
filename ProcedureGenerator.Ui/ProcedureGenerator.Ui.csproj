@@ -76,15 +76,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="InformationToolTip.xaml">
+    <Page Include="Controls\InformationToolTip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TableCheckBoxItem.xaml">
+    <Page Include="Controls\TableCheckBoxItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainForm.xaml">
+    <Page Include="MainFormResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,16 +96,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainForm.xaml.cs">
-      <DependentUpon>MainForm.xaml</DependentUpon>
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoolToVisibleConvertor.cs" />
-    <Compile Include="InformationToolTip.xaml.cs">
+    <Compile Include="Convertors\BoolToVisibleConvertor.cs" />
+    <Compile Include="Controls\InformationToolTip.xaml.cs">
       <DependentUpon>InformationToolTip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,10 +120,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TableCheckBoxItem.xaml.cs">
+    <Compile Include="Controls\TableCheckBoxItem.xaml.cs">
       <DependentUpon>TableCheckBoxItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TablesPresentation.cs" />
+    <Compile Include="Dto\TableDto.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
