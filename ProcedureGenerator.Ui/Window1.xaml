@@ -1,7 +1,6 @@
 ﻿<Window x:Class="ProcedureGenerator.Ui.Window1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Stored Procedure Generator" Loaded="Window_Loaded" MinHeight="292" MinWidth="715" Height="302">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Ui="clr-namespace:ProcedureGenerator.Ui" Title="Stored Procedure Generator" Loaded="Window_Loaded" MinHeight="292" MinWidth="715" Height="302">
     <DockPanel HorizontalAlignment="Stretch" >
         <DockPanel.Background>
             <LinearGradientBrush>
@@ -20,16 +19,22 @@
                     <ComboBox DockPanel.Dock="Right" Height="23" MinWidth="200" MaxWidth="200"   HorizontalAlignment="Left" Margin="5,6,0,0" x:Name="connectionStrings" VerticalAlignment="Top"  />
                     <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="loadTables" VerticalAlignment="Top" Padding="10,2" Click="loadTables_Click" Content="Load"/>
                 </StackPanel>
-                <StackPanel DockPanel.Dock="Bottom" Height="40" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,0"  Click="btnSelectAll_Click" Content="Select All"/>
-                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,0" Click="btnSelectNone_Click" HorizontalAlignment="Right" Content="Select None"/>
+                <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,3"  Click="btnSelectAll_Click" Content="Select All"/>
+                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,3" Click="btnSelectNone_Click" HorizontalAlignment="Right" Content="Select None"/>
                 </StackPanel>
                 <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding AvailableTables}" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
-                            <CheckBox Content="{Binding TableName}" IsChecked="{Binding Selected}" />
+                            <!--<CheckBox Content="{Binding TableName}" IsChecked="{Binding Selected}" />-->
+                            <Ui:TableCheckBoxItem />
+                                
+                          
                         </HierarchicalDataTemplate>
                     </ListBox.ItemTemplate>
+                    <ListBox.ToolTip>
+                        <Ui:InformationToolTip ToolTipTitle="Table List" ToolTipBody="Check the tables to have their stored procedures generated" />
+                    </ListBox.ToolTip>
                 </ListBox>
 
             </DockPanel>
@@ -44,7 +49,9 @@
                         <RowDefinition Height="93.967*" />
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0">
+
                         <StackPanel Orientation="Horizontal">
+
                             <StackPanel   x:Name="stkProcedureSelection"  VerticalAlignment="Top" HorizontalAlignment="Left" >
                                 <CheckBox x:Name="chkSelect"  Content="Select All"/>
                                 <CheckBox  x:Name="chkInsert"  Content="Insert"/>
@@ -53,9 +60,10 @@
                                 <CheckBox  x:Name="chkPrimaryKey"  Content="Select By PK"/>
                                 <CheckBox  x:Name="chkSelectByFk" Content="Select By FK"/>
                             </StackPanel>
+
                             <StackPanel   HorizontalAlignment="Right"  x:Name="canvas2" VerticalAlignment="Top">
-                                <RadioButton  x:Name="radioButton1"  Content="RadioButton"/>
-                                <RadioButton  x:Name="radioButton2"  Content="RadioButton"/>
+                                <RadioButton  x:Name="radioButton1"  Content="Single File"/>
+                                <RadioButton  x:Name="radioButton2"  Content="Multiple Files"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -69,8 +77,9 @@
                         <Button  HorizontalAlignment="Right"  Padding="5,2" x:Name="btnGenerate" VerticalAlignment="Top" Click="btnGenerate_Click" Content="Generate"/>
                     </Border>
                     <Border Grid.Row="3" Grid.RowSpan="2">
-                        <ProgressBar x:Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" Visibility="Hidden" />
-
+                        <DockPanel>
+                            <ProgressBar DockPanel.Dock="Top" x:Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" />
+                        </DockPanel>
                     </Border>
                 </Grid>
             </Border>

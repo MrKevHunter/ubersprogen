@@ -76,6 +76,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="InformationToolTip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TableCheckBoxItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -90,6 +98,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoolToVisibleConvertor.cs" />
+    <Compile Include="InformationToolTip.xaml.cs">
+      <DependentUpon>InformationToolTip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,6 +114,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TableCheckBoxItem.xaml.cs">
+      <DependentUpon>TableCheckBoxItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="TablesPresentation.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -120,6 +135,12 @@
       <Project>{A0D89CB8-31B7-45D7-8892-769BA71D8FD7}</Project>
       <Name>ProcedureGenerator.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\primarykey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ForeignKey.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
