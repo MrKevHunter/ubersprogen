@@ -10,6 +10,7 @@ using System.Windows.Input;
 using ProcedureGenerator.Core.DataAccess;
 using ProcedureGenerator.Core.Domain;
 using ProcedureGenerator.Core.ProcedureGenerators;
+using ProcedureGenerator.Core.Extensions;
 
 namespace ProcedureGenerator.Ui
 {
@@ -123,7 +124,7 @@ namespace ProcedureGenerator.Ui
 														  progressBar1.Value = args.ProgressPercentage;
 													  }
 												  };
-			worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+			worker.RunWorkerCompleted += WorkerCompleted;
 			worker.DoWork += delegate(object s, DoWorkEventArgs args)
 									  {
 										  if (worker.CancellationPending)
@@ -147,7 +148,7 @@ namespace ProcedureGenerator.Ui
 			worker.RunWorkerAsync();
 		}
 
-		void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			btnGenerate.IsEnabled = true;
 			try
@@ -156,7 +157,7 @@ namespace ProcedureGenerator.Ui
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.InnerException.ToString());
+				MessageBox.Show(ex.GetInnermostException().ToString());
 			}
 		}
 
