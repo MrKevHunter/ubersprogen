@@ -15,14 +15,14 @@ using ProcedureGenerator.Core.Extensions;
 namespace ProcedureGenerator.Ui
 {
 	/// <summary>
-	/// Interaction logic for Window1.xaml
+	/// Interaction logic for MainForm.xaml
 	/// </summary>
-	public partial class Window1 : Window
+	public partial class MainForm : Window
 	{
 		private ObservableCollection<TablesPresentation> AvailableTables = new ObservableCollection<TablesPresentation>();
 		private BackgroundWorker worker = new BackgroundWorker();
 		private string OutputPath;
-		public Window1()
+		public MainForm()
 		{
 			InitializeComponent();
 		}
@@ -55,7 +55,7 @@ namespace ProcedureGenerator.Ui
 						schemaDataContext.TABLEs.Where(table => table.TABLE_TYPE == "BASE TABLE").OrderBy(
 							table1 => table1.TABLE_NAME))
 				{
-					AvailableTables.Add(new TablesPresentation() { Selected = true, TableName = table.TABLE_NAME,HasPrimaryKey = false});
+					AvailableTables.Add(new TablesPresentation() { Selected = true, TableName = table.TABLE_NAME,HasPrimaryKey = false, HasForeignKey = true});
 				}
 				lbTables.ItemsSource = AvailableTables;
 			}
