@@ -69,7 +69,7 @@
                         <Button  HorizontalAlignment="Right"  Padding="5,2" x:Name="btnGenerate" VerticalAlignment="Top" Click="btnGenerate_Click" Content="Generate"/>
                     </Border>
                     <Border Grid.Row="3" Grid.RowSpan="2">
-                        <ProgressBar x:Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" />
+                        <ProgressBar x:Name="progressBar1" Height="18.353" VerticalAlignment="Bottom" Visibility="Hidden" />
 
                     </Border>
                 </Grid>
