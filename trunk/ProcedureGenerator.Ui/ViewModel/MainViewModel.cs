@@ -10,6 +10,7 @@ using ProcedureGenerator.Core.DataAccess;
 using ProcedureGenerator.Core.Domain;
 using ProcedureGenerator.Core.Extensions;
 using ProcedureGenerator.Core.ProcedureGenerators;
+using ProcedureGenerator.Ui.Dto;
 
 namespace ProcedureGenerator.Ui.ViewModel
 {
@@ -18,6 +19,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 		private readonly BackgroundWorker worker = new BackgroundWorker();
 
 		private ObservableCollection<TableDto> _tables = new ObservableCollection<TableDto>();
+
 		public ObservableCollection<TableDto> Tables
 		{
 			get { return _tables; }
@@ -25,7 +27,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 		}
 
 
-		public ObservableCollection<TableDto> Tables1 { get; set;}
+		public ObservableCollection<TableDto> Tables1 { get; set; }
 
 		public string ConnectionStringKey { get; set; }
 
@@ -62,24 +64,22 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public void GetListOfTablesFromDatabase()
 		{
-
 			var schemaDataContext = new SchemaDataContext(ConnectionString);
+
 			foreach (
 				TABLE table in
 					schemaDataContext.TABLEs.Where(table => table.TABLE_TYPE == "BASE TABLE").OrderBy(
 						table1 => table1.TABLE_NAME))
 			{
 				_tables.Add(new TableDto
-				           	{
-				           		Selected = true,
-				           		TableName = table.TABLE_NAME,
-				           		HasPrimaryKey = false,
-				           		HasForeignKey = true
-				           	});
+				            	{
+				            		IsChecked = false,
+				            		TableName = table.TABLE_NAME,
+				            		HasPrimaryKey = false,
+				            		HasForeignKey = true
+				            	});
 			}
-			
 		}
-
 
 
 		private void BuildAndWrite(Table table, IGenerateMultipleProcedure generator)
@@ -147,27 +147,28 @@ namespace ProcedureGenerator.Ui.ViewModel
 			InProgress = true;
 			worker.ProgressChanged += (o, args) => { ProgressPercentage = args.ProgressPercentage; };
 			worker.RunWorkerCompleted += WorkerCompleted;
-			worker.DoWork += delegate(object s, DoWorkEventArgs args)
-			                 	{
-			                 		if (worker.CancellationPending)
-			                 		{
-			                 			args.Cancel = true;
-			                 			return;
-			                 		}
-			                 		List<TableDto> tablesPresentations =
-			                 			Tables.Where(presentation => presentation.Selected).ToList();
-			                 		int total = tablesPresentations.Count;
-			                 		int count = 0;
-			                 		foreach (TableDto tablesPresentation in tablesPresentations)
-			                 		{
-			                 			Generate(tablesPresentation);
-			                 			count++;
-			                 			worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
-			                 		}
-			                 		worker.ReportProgress(100);
-			                 	};
+			worker.DoWork += CreateProcedureWorker;
 
 			worker.RunWorkerAsync();
+		}
+
+		private void CreateProcedureWorker(object s, DoWorkEventArgs args)
+		{
+			if (worker.CancellationPending)
+			{
+				args.Cancel = true;
+				return;
+			}
+			List<TableDto> tablesPresentations = Tables.Where(presentation => presentation.IsChecked).ToList();
+			int total = tablesPresentations.Count;
+			int count = 0;
+			foreach (TableDto tablesPresentation in tablesPresentations)
+			{
+				Generate(tablesPresentation);
+				count++;
+				worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
+			}
+			worker.ReportProgress(100);
 		}
 	}
 }

@@ -1,8 +1,8 @@
-namespace ProcedureGenerator.Ui
+namespace ProcedureGenerator.Ui.Dto
 {
 	public class TableDto
 	{
-		public bool Selected { get; set; }
+		public bool IsChecked { get; set; }
 
 		public string TableName { get; set; }
 

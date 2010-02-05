@@ -5,7 +5,7 @@
 		<Ui:BoolToVisibleConvertor x:Key="boolToVisibleConvertor" />
 	</UserControl.Resources>
 	<StackPanel Orientation="Horizontal">
-        <CheckBox Content="{Binding TableName}" IsChecked="{Binding IsSelected}"  />
+        <CheckBox Content="{Binding TableName}" IsChecked="{Binding IsChecked}"  />
         <Image Visibility="{Binding Path=HasPrimaryKey, 
                         Converter={StaticResource boolToVisibleConvertor}}" Source="../Images/primarykey.png" HorizontalAlignment="Right" />
         <Image Visibility="{Binding Path=HasForeignKey, 
