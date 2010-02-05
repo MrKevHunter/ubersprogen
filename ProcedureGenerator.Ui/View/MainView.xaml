@@ -80,7 +80,7 @@
                     </Border>
                     <Border Grid.Row="3" Grid.RowSpan="2">
                         <DockPanel>
-                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="{Binding InProgress}" Value="{Binding ProgressPercentage}" />
+                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="{Binding InProgress}" Value="{Binding ProgressPercentage}" Maximum="100" Minimum="0" />
                         </DockPanel>
                     </Border>
                 </Grid>
