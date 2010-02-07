@@ -14,7 +14,7 @@ using ProcedureGenerator.Ui.Dto;
 
 namespace ProcedureGenerator.Ui.ViewModel
 {
-	public class MainViewModel
+	public class MainViewModel :INotifyPropertyChanged
 	{
 		private readonly BackgroundWorker worker = new BackgroundWorker();
 
@@ -26,8 +26,6 @@ namespace ProcedureGenerator.Ui.ViewModel
 			set { _tables = value; }
 		}
 
-
-		public ObservableCollection<TableDto> Tables1 { get; set; }
 
 		public string ConnectionStringKey { get; set; }
 
@@ -46,9 +44,33 @@ namespace ProcedureGenerator.Ui.ViewModel
 			}
 		}
 
-		public bool InProgress { get; set; }
+		private bool _inProgress;
+		public bool InProgress
+		{
+			get
+			{
+				return _inProgress;
+			}
+			set
+			{
+            _inProgress = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("InProgress"));
+			}
+		}
 
-		public int ProgressPercentage { get; set; }
+		private int _progressPercentage;
+		public int ProgressPercentage
+		{
+			get
+			{
+				return _progressPercentage;
+			}
+			set { _progressPercentage = value;
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs("ProgressPercentage"));
+			}
+		}
 
 		public bool Select { get; set; }
 		public bool SelectById { get; set; }
@@ -170,5 +192,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 			}
 			worker.ReportProgress(100);
 		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }
