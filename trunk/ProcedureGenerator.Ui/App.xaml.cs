@@ -30,6 +30,7 @@ namespace ProcedureGenerator.Ui
 			window.DataContext = viewModel;
 			window.btnLoadTables.Click += viewModel.LoadTables;
 			window.btnGenerate.Click += viewModel.GenerateStoredProcedures;
+			window.btnSelectAll.Click += viewModel.SelectAllTables;
 			window.Show();
 		}
    }

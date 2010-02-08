@@ -106,6 +106,7 @@
     <Compile Include="Controls\InformationToolTip.xaml.cs">
       <DependentUpon>InformationToolTip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Services\DbTableService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -147,9 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ForeignKey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
