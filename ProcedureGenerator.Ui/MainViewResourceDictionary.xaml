@@ -1,10 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:ProcedureGenerator.Ui.ViewModel"
-    xmlns:vw="clr-namespace:ProcedureGenerator.Ui.View">
+    xmlns:View="clr-namespace:ProcedureGenerator.Ui.View">
 
     <DataTemplate DataType="{x:Type vm:MainViewModel}">
-        <vw:MainView />
+        <View:MainView/>
     </DataTemplate>
+
+    <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
 
 </ResourceDictionary>

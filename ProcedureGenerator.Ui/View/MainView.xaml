@@ -5,6 +5,7 @@
     <Window.Resources>
         <ResourceDictionary Source="../MainViewResourceDictionary.xaml" />
     </Window.Resources>
+    
     <DockPanel HorizontalAlignment="Stretch" >
         <DockPanel.Background>
             <LinearGradientBrush>
@@ -55,6 +56,7 @@
                         <StackPanel Orientation="Horizontal">
 
                             <StackPanel   x:Name="stkProcedureSelection"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+                                <TextBlock>Stored Proc</TextBlock>
                                 <CheckBox x:Name="chkSelect"  Content="Select All" IsChecked="{Binding Select}"/>
                                 <CheckBox  x:Name="chkInsert"  Content="Insert" IsChecked="{Binding Insert}"/>
                                 <CheckBox  x:Name="chkDelete"  Content="Delete" IsChecked="{Binding Delete}"/>
@@ -64,8 +66,24 @@
                             </StackPanel>
 
                             <StackPanel   HorizontalAlignment="Right"  x:Name="canvas2" VerticalAlignment="Top">
+                                <TextBlock>File Output</TextBlock>
                                 <RadioButton  x:Name="rdoSingleFile"  Content="Single File"/>
                                 <RadioButton  x:Name="rdoMultipleFiles"  Content="Multiple Files"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock>No Count</TextBlock>
+                                <RadioButton  x:Name="rdoNoCountOn"  Content="Set NoCount On"/>
+                                <RadioButton  x:Name="rdoNoCountOff"  Content="Set NoCount Off"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock>Transaction Isolation Level</TextBlock>
+                                <ComboBox>
+                                    <ComboBoxItem>READ UNCOMMITTED</ComboBoxItem>
+                                    <ComboBoxItem>READ COMMITTED</ComboBoxItem>
+                                    <ComboBoxItem>REPEATABLE READ</ComboBoxItem>
+                                    <ComboBoxItem>SNAPSHOT</ComboBoxItem>
+                                    <ComboBoxItem>SERIALIZABLE</ComboBoxItem>
+                                </ComboBox>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -80,7 +98,8 @@
                     </Border>
                     <Border Grid.Row="3" Grid.RowSpan="2">
                         <DockPanel>
-                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="{Binding InProgress}" Value="{Binding ProgressPercentage}" Maximum="100" Minimum="0" />
+                            <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="{Binding Path=InProgress,
+                                Converter={StaticResource booleanToVisibilityConverter}}" Value="{Binding ProgressPercentage}" Maximum="100" Minimum="0" />
                         </DockPanel>
                     </Border>
                 </Grid>

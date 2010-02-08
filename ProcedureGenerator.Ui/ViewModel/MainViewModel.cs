@@ -11,12 +11,15 @@ using ProcedureGenerator.Core.Domain;
 using ProcedureGenerator.Core.Extensions;
 using ProcedureGenerator.Core.ProcedureGenerators;
 using ProcedureGenerator.Ui.Dto;
+using ProcedureGenerator.Ui.Extensions;
 
 namespace ProcedureGenerator.Ui.ViewModel
 {
-	public class MainViewModel :INotifyPropertyChanged
+	public class MainViewModel : INotifyPropertyChanged
 	{
-		private readonly BackgroundWorker worker = new BackgroundWorker();
+		private readonly BackgroundWorker _worker = new BackgroundWorker();
+		private bool _inProgress;
+		private int _progressPercentage;
 
 		private ObservableCollection<TableDto> _tables = new ObservableCollection<TableDto>();
 
@@ -44,31 +47,25 @@ namespace ProcedureGenerator.Ui.ViewModel
 			}
 		}
 
-		private bool _inProgress;
 		public bool InProgress
 		{
-			get
-			{
-				return _inProgress;
-			}
+			get { return _inProgress; }
 			set
 			{
-            _inProgress = value;
+				_inProgress = value;
 				if (PropertyChanged != null)
 					PropertyChanged(this, new PropertyChangedEventArgs("InProgress"));
 			}
 		}
 
-		private int _progressPercentage;
 		public int ProgressPercentage
 		{
-			get
+			get { return _progressPercentage; }
+			set
 			{
-				return _progressPercentage;
-			}
-			set { _progressPercentage = value;
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs("ProgressPercentage"));
+				_progressPercentage = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("ProgressPercentage"));
 			}
 		}
 
@@ -83,6 +80,12 @@ namespace ProcedureGenerator.Ui.ViewModel
 		{
 			get { return ConfigurationManager.ConnectionStrings[ConnectionStringKey].ConnectionString; }
 		}
+
+		#region INotifyPropertyChanged Members
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		#endregion
 
 		public void GetListOfTablesFromDatabase()
 		{
@@ -164,19 +167,19 @@ namespace ProcedureGenerator.Ui.ViewModel
 		{
 			//		btnGenerate.IsEnabled = false;
 			//		progBar.Visibility = Visibility.Visible;
-			worker.WorkerReportsProgress = true;
+			_worker.WorkerReportsProgress = true;
 
 			InProgress = true;
-			worker.ProgressChanged += (o, args) => { ProgressPercentage = args.ProgressPercentage; };
-			worker.RunWorkerCompleted += WorkerCompleted;
-			worker.DoWork += CreateProcedureWorker;
+			_worker.ProgressChanged += (o, args) => { ProgressPercentage = args.ProgressPercentage; };
+			_worker.RunWorkerCompleted += WorkerCompleted;
+			_worker.DoWork += CreateProcedureWorker;
 
-			worker.RunWorkerAsync();
+			_worker.RunWorkerAsync();
 		}
 
 		private void CreateProcedureWorker(object s, DoWorkEventArgs args)
 		{
-			if (worker.CancellationPending)
+			if (_worker.CancellationPending)
 			{
 				args.Cancel = true;
 				return;
@@ -188,11 +191,18 @@ namespace ProcedureGenerator.Ui.ViewModel
 			{
 				Generate(tablesPresentation);
 				count++;
-				worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
+				_worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
 			}
-			worker.ReportProgress(100);
+			_worker.ReportProgress(100);
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public void SelectAllTables(object sender, RoutedEventArgs e)
+		{
+			if(Tables!=null)
+			{
+				Tables.Each(x => x.IsChecked = true);
+			}
+
+		}
 	}
 }
