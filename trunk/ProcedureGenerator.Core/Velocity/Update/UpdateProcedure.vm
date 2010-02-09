@@ -10,6 +10,7 @@ CREATE PROCEDURE $owner.$procedureName
 
 	)
 AS
+#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
 UPDATE $table
 SET
 #foreach($i in $table.NonIdentityColumns)

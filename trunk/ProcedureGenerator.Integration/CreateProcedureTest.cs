@@ -17,12 +17,21 @@ namespace ProcedureGenerator.Integration
       }
 
       [Test]
-      public void CanCreateADeleteProcedure()
+      public void CanCreateADeleteProcedureWithNoCountOff()
       {
          Table table = GetTable();
          var deleteProcedure = new DeleteProcedure();
-         Procedure procedure = deleteProcedure.Generate(table);
-
+         Procedure procedure = deleteProcedure.Generate(table, new ProcedureConfiguration());
+      	Assert.That(procedure.Body, Is.Not.StringContaining("SET NOCOUNT ON"));
+      }   
+		
+		[Test]
+      public void CanCreateADeleteProcedureWithNoCountOn()
+      {
+         Table table = GetTable();
+         var deleteProcedure = new DeleteProcedure();
+         Procedure procedure = deleteProcedure.Generate(table, new ProcedureConfiguration(){SetNoCountOn = true});
+			Assert.That(procedure.Body, Is.StringContaining("SET NOCOUNT ON"));
       }
 
       [Test]
@@ -30,7 +39,7 @@ namespace ProcedureGenerator.Integration
       {
          Table table = GetTable();
          var foreignKeyProcedure = new ForeignKeyProcedure();
-         List<Procedure> procedures = foreignKeyProcedure.GenerateProcedures(table).ToList();
+			List<Procedure> procedures = foreignKeyProcedure.GenerateProcedures(table, new ProcedureConfiguration()).ToList();
          Assert.That(procedures.Count , Is.EqualTo(4));
 
       }
@@ -40,7 +49,7 @@ namespace ProcedureGenerator.Integration
       {
          Table table = GetTable();
          var procedure = new UpdateProcedure();
-         Procedure generate = procedure.Generate(table);
+			Procedure generate = procedure.Generate(table, new ProcedureConfiguration());
       }
 
       [Test]
@@ -48,7 +57,7 @@ namespace ProcedureGenerator.Integration
       {
          Table table = GetTable();
          var procedure = new InsertProcedure();
-         Procedure generate = procedure.Generate(table);
+			Procedure generate = procedure.Generate(table, new ProcedureConfiguration());
       }
 
       [Test]
@@ -56,7 +65,7 @@ namespace ProcedureGenerator.Integration
       {
          Table table = GetTable();
          var procedure = new SelectProcedure();
-         Procedure generate = procedure.Generate(table);
+			Procedure generate = procedure.Generate(table, new ProcedureConfiguration());
       }
    }
 }

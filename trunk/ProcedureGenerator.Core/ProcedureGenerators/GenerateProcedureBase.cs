@@ -10,9 +10,12 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
 
       protected abstract string ProcedureName { get; }
 
+		protected ProcedureConfiguration ProcConfig { get; set;}
+
       protected Table Table { get; set;}
-      public virtual Procedure Generate(Table t)
+      public virtual Procedure Generate(Table t, ProcedureConfiguration procedureConfig)
       {
+      	ProcConfig = procedureConfig;
          Table = t;
          var sb = new StringBuilder();
          sb.AppendLine(GenerateExistenceCheck());
@@ -23,7 +26,7 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
 
       protected virtual string GenerateBody()
       {
-         var procedureGeneration = new VelocityProcedureGeneration(ProcedureTemplatePath, ProcedureName, Owner, Table);
+			var procedureGeneration = new VelocityProcedureGeneration(ProcedureTemplatePath, ProcedureName, Owner, Table, ProcConfig);
          return procedureGeneration.Execute();
       }
 
@@ -48,7 +51,7 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
       protected virtual string GenerateExistenceCheck()
       {
          var existenceCheck = "/velocity/common/ProcedureDropExisting.vm";
-         var procedureGeneration = new VelocityProcedureGeneration(existenceCheck, ProcedureName,"dbo",null);
+         var procedureGeneration = new VelocityProcedureGeneration(existenceCheck, ProcedureName,"dbo",null, new ProcedureConfiguration());
          return procedureGeneration.Execute();
       }
    }

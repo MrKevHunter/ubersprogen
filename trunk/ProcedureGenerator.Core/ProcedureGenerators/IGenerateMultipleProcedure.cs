@@ -5,6 +5,6 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
 {
    public interface IGenerateMultipleProcedure
    {
-      IEnumerable<Procedure> GenerateProcedures(Table t);
+      IEnumerable<Procedure> GenerateProcedures(Table t, ProcedureConfiguration procConfig);
    }
 }

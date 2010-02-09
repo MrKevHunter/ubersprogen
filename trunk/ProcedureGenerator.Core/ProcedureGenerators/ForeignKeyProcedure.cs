@@ -25,14 +25,16 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
          }
       }
 
+   	private ProcedureConfiguration procConfig;
 
-      public IEnumerable<Procedure> GenerateProcedures(Table t)
+      public IEnumerable<Procedure> GenerateProcedures(Table t, ProcedureConfiguration procConfig)
       {
+      	this.procConfig = procConfig;
          Table = t;
          foreach (Column foreignKey in t.ForeignKeys)
          {
             _foreignKey = foreignKey;
-            yield return Generate(t);
+				yield return Generate(t, procConfig);
 
          }
 
@@ -42,7 +44,7 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
       {
          var procedureGeneration = new VelocityProcedureGeneration(ProcedureTemplatePath,
                                                           string.Format("sp{0}SelectBy{1}", Table.Name,
-                                                                        _foreignKey), Owner, Table);
+																								_foreignKey), Owner, Table, procConfig);
          procedureGeneration.AddKeys(new KeyValuePair<string, object>("key", _foreignKey));
          return procedureGeneration.Execute();
       }

@@ -4,6 +4,6 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
 {
    public interface IGenerateProcedure
    {
-      Procedure Generate(Table t);
+      Procedure Generate(Table t, ProcedureConfiguration procedureConfig);
    }
 }

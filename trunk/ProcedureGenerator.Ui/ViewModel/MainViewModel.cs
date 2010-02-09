@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Windows;
+using ProcedureGenerator.Core.Domain;
 using ProcedureGenerator.Ui.Dto;
 using ProcedureGenerator.Ui.Extensions;
 using ProcedureGenerator.Ui.Services;
@@ -144,6 +145,11 @@ namespace ProcedureGenerator.Ui.ViewModel
 			{
 				Tables.Each(x => x.IsChecked = false);
 			}
+		}
+
+		public ProcedureConfiguration GetProcedureConfig()
+		{
+			return new ProcedureConfiguration(){SetNoCountOn = SetNoCountOn};
 		}
 	}
 }
