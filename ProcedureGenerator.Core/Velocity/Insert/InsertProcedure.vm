@@ -7,6 +7,7 @@
 	
 	#set ($counter = $counter + 1) 
 	#end
+	,@$table.PrimaryKey $table.PrimaryKey.ColumnType  $table.PrimaryKey.Length OUTPUT
 	#set ($counter = 1)
 	)
 AS
@@ -26,5 +27,7 @@ VALUES
 	
 	#set ($counter = $counter + 1) 
 	#end
+	
 )
+	Select @$table.PrimaryKey = Scope_Identity()
 GO

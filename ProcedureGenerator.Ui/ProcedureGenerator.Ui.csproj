@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Services\DbTableService.cs" />
+    <Compile Include="Services\ProcedureGeneratorService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
