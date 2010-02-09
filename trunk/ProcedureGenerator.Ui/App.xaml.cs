@@ -31,6 +31,7 @@ namespace ProcedureGenerator.Ui
 			window.btnLoadTables.Click += viewModel.LoadTables;
 			window.btnGenerate.Click += viewModel.GenerateStoredProcedures;
 			window.btnSelectAll.Click += viewModel.SelectAllTables;
+			window.btnSelectAll.Click += viewModel.SelectNoTables;
 			window.Show();
 		}
    }

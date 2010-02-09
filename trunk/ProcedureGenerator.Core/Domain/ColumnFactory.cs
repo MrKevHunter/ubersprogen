@@ -35,7 +35,7 @@ namespace ProcedureGenerator.Core
                                                                           };
 
 
-      public Column BuildColumn(COLUMN c, IEnumerable<CONSTRAINT_COLUMN_USAGE> foreignKeyList)
+      public Column BuildColumn(COLUMN c, IEnumerable<CONSTRAINT_COLUMN_USAGE> foreignKeyList, IEnumerable<all_column> identityColumns)
       {
 			if (c == null) return null;
 
@@ -43,17 +43,20 @@ namespace ProcedureGenerator.Core
                                  {
                                     Name = c.COLUMN_NAME,
                                     ColumnType = GetColumnType(c.DATA_TYPE),
-                                    Length = c.CHARACTER_MAXIMUM_LENGTH.ToString()
+                                    Length = c.CHARACTER_MAXIMUM_LENGTH.ToString(),
                                  };
          if(foreignKeyList.Any(usage => usage.COLUMN_NAME == column.Name))
             column.IsForeignKey = true;
+
+			if(identityColumns.Any(x => x.name == column.Name))
+				column.IsIdentity = true;
 
          return column;
       }
 
        public Column BuildColumn(COLUMN c)
        {
-          return BuildColumn(c, new List<CONSTRAINT_COLUMN_USAGE>());
+          return BuildColumn(c, new List<CONSTRAINT_COLUMN_USAGE>(),new List<all_column>());
        }
 
       private SqlDbType GetColumnType(string type)

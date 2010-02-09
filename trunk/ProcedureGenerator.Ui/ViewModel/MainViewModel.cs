@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Windows;
-using ProcedureGenerator.Core.DataAccess;
-using ProcedureGenerator.Core.Domain;
-using ProcedureGenerator.Core.Extensions;
-using ProcedureGenerator.Core.ProcedureGenerators;
 using ProcedureGenerator.Ui.Dto;
 using ProcedureGenerator.Ui.Extensions;
+using ProcedureGenerator.Ui.Services;
 
 namespace ProcedureGenerator.Ui.ViewModel
 {
@@ -29,6 +25,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 			set { _tables = value; }
 		}
 
+		public bool SetNoCountOn { get; set;}
 
 		public string ConnectionStringKey { get; set; }
 
@@ -76,7 +73,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 		public bool Update { get; set; }
 		public bool Delete { get; set; }
 
-		private string ConnectionString
+		internal string ConnectionString
 		{
 			get { return ConfigurationManager.ConnectionStrings[ConnectionStringKey].ConnectionString; }
 		}
@@ -89,59 +86,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public void GetListOfTablesFromDatabase()
 		{
-			var schemaDataContext = new SchemaDataContext(ConnectionString);
-
-			foreach (
-				TABLE table in
-					schemaDataContext.TABLEs.Where(table => table.TABLE_TYPE == "BASE TABLE").OrderBy(
-						table1 => table1.TABLE_NAME))
-			{
-				_tables.Add(new TableDto
-				            	{
-				            		IsChecked = false,
-				            		TableName = table.TABLE_NAME,
-				            		HasPrimaryKey = false,
-				            		HasForeignKey = true
-				            	});
-			}
-		}
-
-
-		private void BuildAndWrite(Table table, IGenerateMultipleProcedure generator)
-		{
-			foreach (Procedure procedure in generator.GenerateProcedures(table))
-			{
-				File.WriteAllText(Path.Combine(OutputPath, procedure.FileName), procedure.Body);
-			}
-		}
-
-		private void BuildAndWrite(Table table, IGenerateProcedure generator)
-		{
-			Procedure procedure = generator.Generate(table);
-			File.WriteAllText(Path.Combine(OutputPath, procedure.FileName), procedure.Body);
-		}
-
-		private void Generate(TableDto tablesPresentation)
-		{
-			Table table = new TableBuilder().BuildMeATableFromThis(new SchemaDataContext(ConnectionString),
-			                                                       tablesPresentation.TableName);
-			if (Delete)
-				BuildAndWrite(table, new DeleteProcedure());
-
-			if (Insert)
-				BuildAndWrite(table, new InsertProcedure());
-
-			if (Select)
-				BuildAndWrite(table, new SelectAllProcedure());
-
-			if (SelectById)
-				BuildAndWrite(table, new SelectProcedure());
-
-			if (SelectByFk)
-				BuildAndWrite(table, (IGenerateMultipleProcedure) new ForeignKeyProcedure());
-
-			if (Update)
-				BuildAndWrite(table, new UpdateProcedure());
+			new DbTableService().GetTables(ConnectionString).Each(x => Tables.Add(x));
 		}
 
 		public void LoadTables(object sender, RoutedEventArgs e)
@@ -151,22 +96,11 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			//btnGenerate.IsEnabled = true;
 			InProgress = false;
-			try
-			{
-				object result = e.Result;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.GetInnermostException().ToString());
-			}
 		}
 
 		public void GenerateStoredProcedures(object sender, RoutedEventArgs e)
 		{
-			//		btnGenerate.IsEnabled = false;
-			//		progBar.Visibility = Visibility.Visible;
 			_worker.WorkerReportsProgress = true;
 
 			InProgress = true;
@@ -189,7 +123,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 			int count = 0;
 			foreach (TableDto tablesPresentation in tablesPresentations)
 			{
-				Generate(tablesPresentation);
+				new ProcedureGeneratorService().GenerateProcedures(this, tablesPresentation);
 				count++;
 				_worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
 			}
@@ -198,11 +132,18 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public void SelectAllTables(object sender, RoutedEventArgs e)
 		{
-			if(Tables!=null)
+			if (Tables != null)
 			{
 				Tables.Each(x => x.IsChecked = true);
 			}
+		}
 
+		public void SelectNoTables(object sender, RoutedEventArgs e)
+		{
+			if (Tables != null)
+			{
+				Tables.Each(x => x.IsChecked = false);
+			}
 		}
 	}
 }

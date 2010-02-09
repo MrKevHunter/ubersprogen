@@ -109,6 +109,22 @@ namespace ProcedureGenerator.Core.DataAccess
 				return this.GetTable<TABLE_CONSTRAINT>();
 			}
 		}
+		
+		public System.Data.Linq.Table<systable> systables
+		{
+			get
+			{
+				return this.GetTable<systable>();
+			}
+		}
+		
+		public System.Data.Linq.Table<all_column> all_columns
+		{
+			get
+			{
+				return this.GetTable<all_column>();
+			}
+		}
 	}
 	
 	[Table(Name="INFORMATION_SCHEMA.COLUMNS")]
@@ -1204,6 +1220,960 @@ namespace ProcedureGenerator.Core.DataAccess
 				if ((this._INITIALLY_DEFERRED != value))
 				{
 					this._INITIALLY_DEFERRED = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="sys.tables")]
+	public partial class systable
+	{
+		
+		private string _name;
+		
+		private int _object_id;
+		
+		private System.Nullable<int> _principal_id;
+		
+		private int _schema_id;
+		
+		private int _parent_object_id;
+		
+		private string _type;
+		
+		private string _type_desc;
+		
+		private System.DateTime _create_date;
+		
+		private System.DateTime _modify_date;
+		
+		private bool _is_ms_shipped;
+		
+		private bool _is_published;
+		
+		private bool _is_schema_published;
+		
+		private System.Nullable<int> _lob_data_space_id;
+		
+		private System.Nullable<int> _filestream_data_space_id;
+		
+		private int _max_column_id_used;
+		
+		private bool _lock_on_bulk_load;
+		
+		private System.Nullable<bool> _uses_ansi_nulls;
+		
+		private System.Nullable<bool> _is_replicated;
+		
+		private System.Nullable<bool> _has_replication_filter;
+		
+		private System.Nullable<bool> _is_merge_published;
+		
+		private System.Nullable<bool> _is_sync_tran_subscribed;
+		
+		private bool _has_unchecked_assembly_data;
+		
+		private System.Nullable<int> _text_in_row_limit;
+		
+		private System.Nullable<bool> _large_value_types_out_of_row;
+		
+		private System.Nullable<bool> _is_tracked_by_cdc;
+		
+		private System.Nullable<byte> _lock_escalation;
+		
+		private string _lock_escalation_desc;
+		
+		public systable()
+		{
+		}
+		
+		[Column(Storage="_name", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_object_id", DbType="Int NOT NULL")]
+		public int object_id
+		{
+			get
+			{
+				return this._object_id;
+			}
+			set
+			{
+				if ((this._object_id != value))
+				{
+					this._object_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_principal_id", DbType="Int")]
+		public System.Nullable<int> principal_id
+		{
+			get
+			{
+				return this._principal_id;
+			}
+			set
+			{
+				if ((this._principal_id != value))
+				{
+					this._principal_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_schema_id", DbType="Int NOT NULL")]
+		public int schema_id
+		{
+			get
+			{
+				return this._schema_id;
+			}
+			set
+			{
+				if ((this._schema_id != value))
+				{
+					this._schema_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_parent_object_id", DbType="Int NOT NULL")]
+		public int parent_object_id
+		{
+			get
+			{
+				return this._parent_object_id;
+			}
+			set
+			{
+				if ((this._parent_object_id != value))
+				{
+					this._parent_object_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_type", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_type_desc", DbType="NVarChar(60)")]
+		public string type_desc
+		{
+			get
+			{
+				return this._type_desc;
+			}
+			set
+			{
+				if ((this._type_desc != value))
+				{
+					this._type_desc = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_create_date", DbType="DateTime NOT NULL")]
+		public System.DateTime create_date
+		{
+			get
+			{
+				return this._create_date;
+			}
+			set
+			{
+				if ((this._create_date != value))
+				{
+					this._create_date = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_modify_date", DbType="DateTime NOT NULL")]
+		public System.DateTime modify_date
+		{
+			get
+			{
+				return this._modify_date;
+			}
+			set
+			{
+				if ((this._modify_date != value))
+				{
+					this._modify_date = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_ms_shipped", DbType="Bit NOT NULL")]
+		public bool is_ms_shipped
+		{
+			get
+			{
+				return this._is_ms_shipped;
+			}
+			set
+			{
+				if ((this._is_ms_shipped != value))
+				{
+					this._is_ms_shipped = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_published", DbType="Bit NOT NULL")]
+		public bool is_published
+		{
+			get
+			{
+				return this._is_published;
+			}
+			set
+			{
+				if ((this._is_published != value))
+				{
+					this._is_published = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_schema_published", DbType="Bit NOT NULL")]
+		public bool is_schema_published
+		{
+			get
+			{
+				return this._is_schema_published;
+			}
+			set
+			{
+				if ((this._is_schema_published != value))
+				{
+					this._is_schema_published = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_lob_data_space_id", DbType="Int")]
+		public System.Nullable<int> lob_data_space_id
+		{
+			get
+			{
+				return this._lob_data_space_id;
+			}
+			set
+			{
+				if ((this._lob_data_space_id != value))
+				{
+					this._lob_data_space_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_filestream_data_space_id", DbType="Int")]
+		public System.Nullable<int> filestream_data_space_id
+		{
+			get
+			{
+				return this._filestream_data_space_id;
+			}
+			set
+			{
+				if ((this._filestream_data_space_id != value))
+				{
+					this._filestream_data_space_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_max_column_id_used", DbType="Int NOT NULL")]
+		public int max_column_id_used
+		{
+			get
+			{
+				return this._max_column_id_used;
+			}
+			set
+			{
+				if ((this._max_column_id_used != value))
+				{
+					this._max_column_id_used = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_lock_on_bulk_load", DbType="Bit NOT NULL")]
+		public bool lock_on_bulk_load
+		{
+			get
+			{
+				return this._lock_on_bulk_load;
+			}
+			set
+			{
+				if ((this._lock_on_bulk_load != value))
+				{
+					this._lock_on_bulk_load = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_uses_ansi_nulls", DbType="Bit")]
+		public System.Nullable<bool> uses_ansi_nulls
+		{
+			get
+			{
+				return this._uses_ansi_nulls;
+			}
+			set
+			{
+				if ((this._uses_ansi_nulls != value))
+				{
+					this._uses_ansi_nulls = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_replicated", DbType="Bit")]
+		public System.Nullable<bool> is_replicated
+		{
+			get
+			{
+				return this._is_replicated;
+			}
+			set
+			{
+				if ((this._is_replicated != value))
+				{
+					this._is_replicated = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_has_replication_filter", DbType="Bit")]
+		public System.Nullable<bool> has_replication_filter
+		{
+			get
+			{
+				return this._has_replication_filter;
+			}
+			set
+			{
+				if ((this._has_replication_filter != value))
+				{
+					this._has_replication_filter = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_merge_published", DbType="Bit")]
+		public System.Nullable<bool> is_merge_published
+		{
+			get
+			{
+				return this._is_merge_published;
+			}
+			set
+			{
+				if ((this._is_merge_published != value))
+				{
+					this._is_merge_published = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_sync_tran_subscribed", DbType="Bit")]
+		public System.Nullable<bool> is_sync_tran_subscribed
+		{
+			get
+			{
+				return this._is_sync_tran_subscribed;
+			}
+			set
+			{
+				if ((this._is_sync_tran_subscribed != value))
+				{
+					this._is_sync_tran_subscribed = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_has_unchecked_assembly_data", DbType="Bit NOT NULL")]
+		public bool has_unchecked_assembly_data
+		{
+			get
+			{
+				return this._has_unchecked_assembly_data;
+			}
+			set
+			{
+				if ((this._has_unchecked_assembly_data != value))
+				{
+					this._has_unchecked_assembly_data = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_text_in_row_limit", DbType="Int")]
+		public System.Nullable<int> text_in_row_limit
+		{
+			get
+			{
+				return this._text_in_row_limit;
+			}
+			set
+			{
+				if ((this._text_in_row_limit != value))
+				{
+					this._text_in_row_limit = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_large_value_types_out_of_row", DbType="Bit")]
+		public System.Nullable<bool> large_value_types_out_of_row
+		{
+			get
+			{
+				return this._large_value_types_out_of_row;
+			}
+			set
+			{
+				if ((this._large_value_types_out_of_row != value))
+				{
+					this._large_value_types_out_of_row = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_tracked_by_cdc", DbType="Bit")]
+		public System.Nullable<bool> is_tracked_by_cdc
+		{
+			get
+			{
+				return this._is_tracked_by_cdc;
+			}
+			set
+			{
+				if ((this._is_tracked_by_cdc != value))
+				{
+					this._is_tracked_by_cdc = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_lock_escalation", DbType="TinyInt")]
+		public System.Nullable<byte> lock_escalation
+		{
+			get
+			{
+				return this._lock_escalation;
+			}
+			set
+			{
+				if ((this._lock_escalation != value))
+				{
+					this._lock_escalation = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_lock_escalation_desc", DbType="NVarChar(60)")]
+		public string lock_escalation_desc
+		{
+			get
+			{
+				return this._lock_escalation_desc;
+			}
+			set
+			{
+				if ((this._lock_escalation_desc != value))
+				{
+					this._lock_escalation_desc = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="sys.all_columns")]
+	public partial class all_column
+	{
+		
+		private int _object_id;
+		
+		private string _name;
+		
+		private int _column_id;
+		
+		private byte _system_type_id;
+		
+		private int _user_type_id;
+		
+		private short _max_length;
+		
+		private byte _precision;
+		
+		private byte _scale;
+		
+		private string _collation_name;
+		
+		private System.Nullable<bool> _is_nullable;
+		
+		private bool _is_ansi_padded;
+		
+		private bool _is_rowguidcol;
+		
+		private bool _is_identity;
+		
+		private bool _is_computed;
+		
+		private bool _is_filestream;
+		
+		private System.Nullable<bool> _is_replicated;
+		
+		private System.Nullable<bool> _is_non_sql_subscribed;
+		
+		private System.Nullable<bool> _is_merge_published;
+		
+		private System.Nullable<bool> _is_dts_replicated;
+		
+		private bool _is_xml_document;
+		
+		private int _xml_collection_id;
+		
+		private int _default_object_id;
+		
+		private int _rule_object_id;
+		
+		private System.Nullable<bool> _is_sparse;
+		
+		private System.Nullable<bool> _is_column_set;
+		
+		public all_column()
+		{
+		}
+		
+		[Column(Storage="_object_id", DbType="Int NOT NULL")]
+		public int object_id
+		{
+			get
+			{
+				return this._object_id;
+			}
+			set
+			{
+				if ((this._object_id != value))
+				{
+					this._object_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_name", DbType="NVarChar(128)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_column_id", DbType="Int NOT NULL")]
+		public int column_id
+		{
+			get
+			{
+				return this._column_id;
+			}
+			set
+			{
+				if ((this._column_id != value))
+				{
+					this._column_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_system_type_id", DbType="TinyInt NOT NULL")]
+		public byte system_type_id
+		{
+			get
+			{
+				return this._system_type_id;
+			}
+			set
+			{
+				if ((this._system_type_id != value))
+				{
+					this._system_type_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_user_type_id", DbType="Int NOT NULL")]
+		public int user_type_id
+		{
+			get
+			{
+				return this._user_type_id;
+			}
+			set
+			{
+				if ((this._user_type_id != value))
+				{
+					this._user_type_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_max_length", DbType="SmallInt NOT NULL")]
+		public short max_length
+		{
+			get
+			{
+				return this._max_length;
+			}
+			set
+			{
+				if ((this._max_length != value))
+				{
+					this._max_length = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_precision", DbType="TinyInt NOT NULL")]
+		public byte precision
+		{
+			get
+			{
+				return this._precision;
+			}
+			set
+			{
+				if ((this._precision != value))
+				{
+					this._precision = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_scale", DbType="TinyInt NOT NULL")]
+		public byte scale
+		{
+			get
+			{
+				return this._scale;
+			}
+			set
+			{
+				if ((this._scale != value))
+				{
+					this._scale = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_collation_name", DbType="NVarChar(128)")]
+		public string collation_name
+		{
+			get
+			{
+				return this._collation_name;
+			}
+			set
+			{
+				if ((this._collation_name != value))
+				{
+					this._collation_name = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_nullable", DbType="Bit")]
+		public System.Nullable<bool> is_nullable
+		{
+			get
+			{
+				return this._is_nullable;
+			}
+			set
+			{
+				if ((this._is_nullable != value))
+				{
+					this._is_nullable = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_ansi_padded", DbType="Bit NOT NULL")]
+		public bool is_ansi_padded
+		{
+			get
+			{
+				return this._is_ansi_padded;
+			}
+			set
+			{
+				if ((this._is_ansi_padded != value))
+				{
+					this._is_ansi_padded = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_rowguidcol", DbType="Bit NOT NULL")]
+		public bool is_rowguidcol
+		{
+			get
+			{
+				return this._is_rowguidcol;
+			}
+			set
+			{
+				if ((this._is_rowguidcol != value))
+				{
+					this._is_rowguidcol = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_identity", DbType="Bit NOT NULL")]
+		public bool is_identity
+		{
+			get
+			{
+				return this._is_identity;
+			}
+			set
+			{
+				if ((this._is_identity != value))
+				{
+					this._is_identity = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_computed", DbType="Bit NOT NULL")]
+		public bool is_computed
+		{
+			get
+			{
+				return this._is_computed;
+			}
+			set
+			{
+				if ((this._is_computed != value))
+				{
+					this._is_computed = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_filestream", DbType="Bit NOT NULL")]
+		public bool is_filestream
+		{
+			get
+			{
+				return this._is_filestream;
+			}
+			set
+			{
+				if ((this._is_filestream != value))
+				{
+					this._is_filestream = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_replicated", DbType="Bit")]
+		public System.Nullable<bool> is_replicated
+		{
+			get
+			{
+				return this._is_replicated;
+			}
+			set
+			{
+				if ((this._is_replicated != value))
+				{
+					this._is_replicated = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_non_sql_subscribed", DbType="Bit")]
+		public System.Nullable<bool> is_non_sql_subscribed
+		{
+			get
+			{
+				return this._is_non_sql_subscribed;
+			}
+			set
+			{
+				if ((this._is_non_sql_subscribed != value))
+				{
+					this._is_non_sql_subscribed = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_merge_published", DbType="Bit")]
+		public System.Nullable<bool> is_merge_published
+		{
+			get
+			{
+				return this._is_merge_published;
+			}
+			set
+			{
+				if ((this._is_merge_published != value))
+				{
+					this._is_merge_published = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_dts_replicated", DbType="Bit")]
+		public System.Nullable<bool> is_dts_replicated
+		{
+			get
+			{
+				return this._is_dts_replicated;
+			}
+			set
+			{
+				if ((this._is_dts_replicated != value))
+				{
+					this._is_dts_replicated = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_xml_document", DbType="Bit NOT NULL")]
+		public bool is_xml_document
+		{
+			get
+			{
+				return this._is_xml_document;
+			}
+			set
+			{
+				if ((this._is_xml_document != value))
+				{
+					this._is_xml_document = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_xml_collection_id", DbType="Int NOT NULL")]
+		public int xml_collection_id
+		{
+			get
+			{
+				return this._xml_collection_id;
+			}
+			set
+			{
+				if ((this._xml_collection_id != value))
+				{
+					this._xml_collection_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_default_object_id", DbType="Int NOT NULL")]
+		public int default_object_id
+		{
+			get
+			{
+				return this._default_object_id;
+			}
+			set
+			{
+				if ((this._default_object_id != value))
+				{
+					this._default_object_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_rule_object_id", DbType="Int NOT NULL")]
+		public int rule_object_id
+		{
+			get
+			{
+				return this._rule_object_id;
+			}
+			set
+			{
+				if ((this._rule_object_id != value))
+				{
+					this._rule_object_id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_sparse", DbType="Bit")]
+		public System.Nullable<bool> is_sparse
+		{
+			get
+			{
+				return this._is_sparse;
+			}
+			set
+			{
+				if ((this._is_sparse != value))
+				{
+					this._is_sparse = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_is_column_set", DbType="Bit")]
+		public System.Nullable<bool> is_column_set
+		{
+			get
+			{
+				return this._is_column_set;
+			}
+			set
+			{
+				if ((this._is_column_set != value))
+				{
+					this._is_column_set = value;
 				}
 			}
 		}

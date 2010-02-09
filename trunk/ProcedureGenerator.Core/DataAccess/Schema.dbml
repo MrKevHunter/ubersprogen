@@ -83,4 +83,64 @@
       <Column Name="INITIALLY_DEFERRED" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="sys.tables" Member="systables">
+    <Type Name="systable">
+      <Column Name="name" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="principal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="schema_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="parent_object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="type_desc" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modify_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="is_ms_shipped" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_published" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_schema_published" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="lob_data_space_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="filestream_data_space_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="max_column_id_used" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lock_on_bulk_load" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="uses_ansi_nulls" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_replicated" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="has_replication_filter" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_merge_published" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_sync_tran_subscribed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="has_unchecked_assembly_data" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="text_in_row_limit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="large_value_types_out_of_row" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_tracked_by_cdc" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="lock_escalation" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="lock_escalation_desc" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="sys.all_columns" Member="all_columns">
+    <Type Name="all_column">
+      <Column Name="object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="column_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="system_type_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="user_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="max_length" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="precision" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="scale" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="collation_name" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="is_nullable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_ansi_padded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_rowguidcol" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_identity" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_computed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_filestream" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="is_replicated" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_non_sql_subscribed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_merge_published" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_dts_replicated" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_xml_document" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="xml_collection_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="default_object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rule_object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="is_sparse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_column_set" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

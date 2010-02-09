@@ -68,11 +68,11 @@
                             <StackPanel   HorizontalAlignment="Right"  x:Name="canvas2" VerticalAlignment="Top">
                                 <TextBlock>File Output</TextBlock>
                                 <RadioButton  x:Name="rdoSingleFile"  Content="Single File"/>
-                                <RadioButton  x:Name="rdoMultipleFiles"  Content="Multiple Files"/>
+                                <RadioButton  x:Name="rdoMultipleFiles" IsChecked="True" Content="Multiple Files"/>
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock>No Count</TextBlock>
-                                <RadioButton  x:Name="rdoNoCountOn"  Content="Set NoCount On"/>
+                                <RadioButton  x:Name="rdoNoCountOn" IsChecked="True"  Content="Set NoCount On"/>
                                 <RadioButton  x:Name="rdoNoCountOff"  Content="Set NoCount Off"/>
                             </StackPanel>
                             <StackPanel>
