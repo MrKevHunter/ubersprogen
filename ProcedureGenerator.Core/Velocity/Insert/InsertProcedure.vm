@@ -11,6 +11,7 @@
 	#set ($counter = 1)
 	)
 AS
+	#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
 	INSERT INTO $table.Schema.$table
 (
 #foreach($i in $table.NonIdentityColumns)

@@ -13,20 +13,22 @@ namespace ProcedureGenerator.Core.Velocity
       private readonly string _path;
       private readonly string _owner = "dbo";
       private readonly Table _table;
-      private readonly string _procedureName;
+   	private readonly ProcedureConfiguration _procConfig;
+   	private readonly string _procedureName;
       private VelocityContext _context;
 
-      public VelocityProcedureGeneration(string path, string procedureName) :this(path,procedureName,"",null)
+      public VelocityProcedureGeneration(string path, string procedureName) :this(path,procedureName,"",null, new ProcedureConfiguration())
       {
       }
 
-      public VelocityProcedureGeneration(string path, string procedureName, string owner, Table table)
+      public VelocityProcedureGeneration(string path, string procedureName, string owner, Table table, ProcedureConfiguration procConfig)
       {
          _path = path;
          _context = new VelocityContext();
          _owner = owner;
          _table = table;
-         _procedureName = procedureName;
+      	_procConfig = procConfig;
+      	_procedureName = procedureName;
       }
 
       public string Execute()
@@ -41,7 +43,7 @@ namespace ProcedureGenerator.Core.Velocity
          _context.Put("owner", _owner);
          _context.Put("now", DateTime.Now.ToLongDateString());
          _context.Put("table", _table);
-			
+      	_context.Put("procConfig", _procConfig);
          var writer = new StringWriter();
          velocity.GetTemplate(_path).Merge(_context, writer);
          return writer.GetStringBuilder().ToString();
