@@ -31,7 +31,7 @@ namespace ProcedureGenerator.Core.Domain
 			        select table.TABLE_SCHEMA).First();
 		}
 
-		private IEnumerable<CONSTRAINT_COLUMN_USAGE> GetForeignKeyList(SchemaDataContext context, string tableName)
+		public IEnumerable<CONSTRAINT_COLUMN_USAGE> GetForeignKeyList(SchemaDataContext context, string tableName)
 		{
 			return (from constraintColumnUsage in context.CONSTRAINT_COLUMN_USAGEs
 			        join tableConstraint in context.TABLE_CONSTRAINTs
@@ -51,7 +51,7 @@ namespace ProcedureGenerator.Core.Domain
 		}
 
 
-		private Column GetPrimaryKey(SchemaDataContext context, string tableName)
+		public Column GetPrimaryKey(SchemaDataContext context, string tableName)
 		{
 			return new ColumnFactory().BuildColumn((from tableConstraint in context.TABLE_CONSTRAINTs
 			                                        join columnConstraint in context.CONSTRAINT_COLUMN_USAGEs
