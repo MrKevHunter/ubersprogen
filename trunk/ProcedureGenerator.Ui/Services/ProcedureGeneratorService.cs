@@ -23,10 +23,10 @@ namespace ProcedureGenerator.Ui.Services
 				BuildAndWrite(table, new InsertProcedure());
 
 			if (model.Select)
-				BuildAndWrite(table, new SelectAllProcedure());
+				BuildAndWrite(table, new SelectProcedure());
 
 			if (model.SelectById)
-				BuildAndWrite(table, new SelectProcedure());
+				BuildAndWrite(table, new SelectByIdProcedure());
 
 			if (model.SelectByFk)
 				BuildAndWrite(table, (IGenerateMultipleProcedure)new ForeignKeyProcedure());
@@ -37,7 +37,7 @@ namespace ProcedureGenerator.Ui.Services
 
 		private void BuildAndWrite(Table table, IGenerateMultipleProcedure generator)
 		{
-			foreach (Procedure procedure in generator.GenerateProcedures(table, new ProcedureConfiguration()))
+			foreach (Procedure procedure in generator.GenerateProcedures(table, _model.GetProcedureConfig()))
 			{
 				File.WriteAllText(Path.Combine(_model.OutputPath, procedure.FileName), procedure.Body);
 			}

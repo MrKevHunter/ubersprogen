@@ -32,6 +32,8 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public string OutputPath { get; set; }
 
+		public string IsolationLevel { get; set;}
+
 		public ObservableCollection<object> ConnectionStrings
 		{
 			get
@@ -149,7 +151,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public ProcedureConfiguration GetProcedureConfig()
 		{
-			return new ProcedureConfiguration(){SetNoCountOn = SetNoCountOn};
+			return new ProcedureConfiguration(){SetNoCountOn = SetNoCountOn,IsolationLevel = IsolationLevel};
 		}
 	}
 }

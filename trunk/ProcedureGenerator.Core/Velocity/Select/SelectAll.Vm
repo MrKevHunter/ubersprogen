@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE $owner.$procedureName
 AS
 #if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
+	$procConfig.IsolationLevel
 	SELECT 
 		#set ($counter = 1)
 #foreach($i in $table.Columns)

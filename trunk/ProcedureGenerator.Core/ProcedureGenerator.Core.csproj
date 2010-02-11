@@ -72,8 +72,8 @@
     <Compile Include="ProcedureGenerators\IGenerateMultipleProcedure.cs" />
     <Compile Include="ProcedureGenerators\IGenerateProcedure.cs" />
     <Compile Include="ProcedureGenerators\InsertProcedure.cs" />
-    <Compile Include="ProcedureGenerators\SelectAllProcedure.cs" />
     <Compile Include="ProcedureGenerators\SelectProcedure.cs" />
+    <Compile Include="ProcedureGenerators\SelectByIdProcedure.cs" />
     <Compile Include="ProcedureGenerators\UpdateProcedure.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

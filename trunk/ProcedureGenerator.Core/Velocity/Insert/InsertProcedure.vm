@@ -11,6 +11,7 @@
 	#set ($counter = 1)
 	)
 AS
+	$procConfig.IsolationLevel
 	#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
 	INSERT INTO $table.Schema.$table
 (

@@ -10,6 +10,8 @@ CREATE PROCEDURE $owner.$procedureName
 
 	)
 AS
+	$procConfig.IsolationLevel
+
 #if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
 UPDATE $table
 SET

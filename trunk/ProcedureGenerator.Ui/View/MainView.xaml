@@ -77,7 +77,7 @@
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock>Transaction Isolation Level</TextBlock>
-                                <ComboBox>
+                                <ComboBox Text="{Binding IsolationLevel}">
                                     <ComboBoxItem>READ UNCOMMITTED</ComboBoxItem>
                                     <ComboBoxItem>READ COMMITTED</ComboBoxItem>
                                     <ComboBoxItem>REPEATABLE READ</ComboBoxItem>
