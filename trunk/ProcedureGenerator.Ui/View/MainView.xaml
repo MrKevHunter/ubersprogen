@@ -5,7 +5,7 @@
     <Window.Resources>
         <ResourceDictionary Source="../MainViewResourceDictionary.xaml" />
     </Window.Resources>
-    
+
     <DockPanel HorizontalAlignment="Stretch" >
         <DockPanel.Background>
             <LinearGradientBrush>
@@ -23,7 +23,7 @@
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="1,0,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" >
                     <ComboBox DockPanel.Dock="Right" Height="23" MinWidth="200" MaxWidth="200"   HorizontalAlignment="Left" Margin="5,6,0,0" x:Name="connectionStrings" VerticalAlignment="Top" SelectedValue="{Binding ConnectionStringKey}" ItemsSource="{Binding ConnectionStrings}"  />
                     <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="btnLoadTables" VerticalAlignment="Top" Padding="10,2" Content="Load"/>
-                    
+
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Height="23" HorizontalAlignment="Left" Margin="10,5,45,5" x:Name="btnSelectAll" VerticalAlignment="Center" Padding="10,3"   Content="Select All"/>
@@ -47,9 +47,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="12.304*"/>
-                        <RowDefinition Height="8.049*" />
-                        <RowDefinition Height="93.967*" />
+                        <RowDefinition Height="11*"/>
+                        <RowDefinition Height="7*" />
+                        <RowDefinition Height="81*" />
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0">
 
@@ -100,9 +100,15 @@
                         <DockPanel>
                             <ProgressBar DockPanel.Dock="Top" x:Name="progBar" Height="18.353" VerticalAlignment="Bottom" Visibility="{Binding Path=InProgress,
                                 Converter={StaticResource booleanToVisibilityConverter}}" Value="{Binding ProgressPercentage}" Maximum="100" Minimum="0" />
+
                         </DockPanel>
                     </Border>
+                    <Border Grid.Row="5">
+                        <Button  HorizontalAlignment="Right" Padding="5,2" x:Name="btnCancel" Visibility="{Binding Path=InProgress,
+                                Converter={StaticResource booleanToVisibilityConverter}}" VerticalAlignment="Top"  Content="Cancel" Height="24" />
+                    </Border>
                 </Grid>
+
             </Border>
         </Grid>
     </DockPanel>

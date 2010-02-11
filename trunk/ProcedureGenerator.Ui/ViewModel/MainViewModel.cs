@@ -107,6 +107,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 			_worker.WorkerReportsProgress = true;
 
 			InProgress = true;
+			_worker.WorkerSupportsCancellation = true;
 			_worker.ProgressChanged += (o, args) => { ProgressPercentage = args.ProgressPercentage; };
 			_worker.RunWorkerCompleted += WorkerCompleted;
 			_worker.DoWork += CreateProcedureWorker;
@@ -116,16 +117,17 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		private void CreateProcedureWorker(object s, DoWorkEventArgs args)
 		{
-			if (_worker.CancellationPending)
-			{
-				args.Cancel = true;
-				return;
-			}
+
 			List<TableDto> tablesPresentations = Tables.Where(presentation => presentation.IsChecked).ToList();
 			int total = tablesPresentations.Count;
 			int count = 0;
 			foreach (TableDto tablesPresentation in tablesPresentations)
 			{
+				if (_worker.CancellationPending)
+				{
+					args.Cancel = true;
+					return;
+				}
 				new ProcedureGeneratorService().GenerateProcedures(this, tablesPresentation);
 				count++;
 				_worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
@@ -152,6 +154,11 @@ namespace ProcedureGenerator.Ui.ViewModel
 		public ProcedureConfiguration GetProcedureConfig()
 		{
 			return new ProcedureConfiguration(){SetNoCountOn = SetNoCountOn,IsolationLevel = IsolationLevel};
+		}
+
+		public void CancelProcess(object sender, RoutedEventArgs e)
+		{
+			_worker.CancelAsync();
 		}
 	}
 }
