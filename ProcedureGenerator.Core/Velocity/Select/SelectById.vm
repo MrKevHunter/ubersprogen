@@ -1,5 +1,7 @@
 ﻿CREATE PROCEDURE $owner.$procedureName (@primaryKey as $table.PrimaryKey.ColumnType)
 AS
+	$procConfig.IsolationLevel
+	
 #if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
 	SELECT 
 		#set ($counter = 1)

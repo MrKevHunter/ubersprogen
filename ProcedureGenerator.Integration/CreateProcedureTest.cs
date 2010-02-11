@@ -64,8 +64,8 @@ namespace ProcedureGenerator.Integration
       public void CanCreateASelectProcedure()
       {
          Table table = GetTable();
-         var procedure = new SelectProcedure();
-			Procedure generate = procedure.Generate(table, new ProcedureConfiguration());
+         var procedure = new SelectByIdProcedure();
+			Procedure generate = procedure.Generate(table, new ProcedureConfiguration(){IsolationLevel = "MyLevel"});
       }
    }
 }

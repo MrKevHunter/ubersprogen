@@ -3,5 +3,7 @@ AS
 
 	#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
 
+	$procConfig.IsolationLevel
+
 	DELETE FROM $table.Schema.$table WHERE $table.PrimaryKey = @primaryKey
 GO
