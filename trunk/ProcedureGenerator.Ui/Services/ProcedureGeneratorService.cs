@@ -37,6 +37,7 @@ namespace ProcedureGenerator.Ui.Services
 
 		private void BuildAndWrite(Table table, IGenerateMultipleProcedure generator)
 		{
+			
 			foreach (Procedure procedure in generator.GenerateProcedures(table, _model.GetProcedureConfig()))
 			{
 				File.WriteAllText(Path.Combine(_model.OutputPath, procedure.FileName), procedure.Body);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.Linq;
 using System.Linq;
 using System.Windows;
 using ProcedureGenerator.Core.Domain;
@@ -24,6 +25,11 @@ namespace ProcedureGenerator.Ui.ViewModel
 		{
 			get { return _tables; }
 			set { _tables = value; }
+		}
+
+		public enum FileOutputType
+		{
+			Multiple,Single
 		}
 
 		public bool SetNoCountOn { get; set;}
@@ -137,9 +143,14 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public void SelectAllTables(object sender, RoutedEventArgs e)
 		{
+			SetIsCheckedIfMatch(dto => true);
+		}
+
+		private void SetIsCheckedIfMatch(Func<TableDto, bool> predicate)
+		{
 			if (Tables != null)
 			{
-				Tables.Each(x => x.IsChecked = true);
+				Tables.Where(predicate).Each(x => x.IsChecked = true);
 			}
 		}
 
@@ -159,6 +170,21 @@ namespace ProcedureGenerator.Ui.ViewModel
 		public void CancelProcess(object sender, RoutedEventArgs e)
 		{
 			_worker.CancelAsync();
+		}
+
+		public void SelectAllWithPk(object sender, RoutedEventArgs e)
+		{
+			SetIsCheckedIfMatch(dto => dto.HasPrimaryKey);
+		}
+
+		public void SelectAllWithFk(object sender, RoutedEventArgs e)
+		{
+			SetIsCheckedIfMatch(dto => dto.HasForeignKey);
+		}
+
+		public void SelectAllWithAnyKey(object sender, RoutedEventArgs e)
+		{
+			SetIsCheckedIfMatch(dto => dto.HasPrimaryKey || dto.HasForeignKey);
 		}
 	}
 }
