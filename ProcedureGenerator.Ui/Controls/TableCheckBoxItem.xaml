@@ -7,9 +7,9 @@
 	<StackPanel Orientation="Horizontal">
         <CheckBox Content="{Binding TableName}" IsChecked="{Binding IsChecked}" MinWidth="170" BorderBrush="Azure" BorderThickness="2" />
         <Image  Visibility="{Binding Path=HasPrimaryKey, 
-                        Converter={StaticResource boolToVisibleConvertor}}" Source="../Images/primarykey.png" HorizontalAlignment="Right"  />
+                        Converter={StaticResource boolToVisibleConvertor}}" Source="../Images/primarykey.png" HorizontalAlignment="Left"  />
         <Image Visibility="{Binding Path=HasForeignKey, 
-                        Converter={StaticResource boolToVisibleConvertor}}" Source="../Images/ForeignKey.png" HorizontalAlignment="Right"/>
+                        Converter={StaticResource boolToVisibleConvertor}}" Source="../Images/ForeignKey.png" HorizontalAlignment="Left"/>
         
     </StackPanel>
 </UserControl>

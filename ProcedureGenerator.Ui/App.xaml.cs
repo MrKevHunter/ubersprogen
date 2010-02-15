@@ -30,10 +30,12 @@ namespace ProcedureGenerator.Ui
 			window.DataContext = viewModel;
 			window.btnLoadTables.Click += viewModel.LoadTables;
 			window.btnGenerate.Click += viewModel.GenerateStoredProcedures;
-			window.btnSelectAll.Click += viewModel.SelectAllTables;
+			window.btnSelect.Click += viewModel.SelectAllTables;
 			window.btnSelectNone.Click += viewModel.SelectNoTables;
 			window.btnCancel.Click += viewModel.CancelProcess;
-		
+			window.btnSelectAllWithPk.Click += viewModel.SelectAllWithPk;
+			window.btnSelectAllWithFk.Click += viewModel.SelectAllWithFk;
+			window.btnSelectAllWithAny.Click += viewModel.SelectAllWithAnyKey;
 			window.Show();
 		}
    }
