@@ -109,9 +109,6 @@
       <Column Name="has_unchecked_assembly_data" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="text_in_row_limit" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="large_value_types_out_of_row" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="is_tracked_by_cdc" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="lock_escalation" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="lock_escalation_desc" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="sys.all_columns" Member="all_columns">
@@ -139,8 +136,6 @@
       <Column Name="xml_collection_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="default_object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="rule_object_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="is_sparse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="is_column_set" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

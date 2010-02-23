@@ -1277,12 +1277,6 @@ namespace ProcedureGenerator.Core.DataAccess
 		
 		private System.Nullable<bool> _large_value_types_out_of_row;
 		
-		private System.Nullable<bool> _is_tracked_by_cdc;
-		
-		private System.Nullable<byte> _lock_escalation;
-		
-		private string _lock_escalation_desc;
-		
 		public systable()
 		{
 		}
@@ -1670,54 +1664,6 @@ namespace ProcedureGenerator.Core.DataAccess
 				}
 			}
 		}
-		
-		[Column(Storage="_is_tracked_by_cdc", DbType="Bit")]
-		public System.Nullable<bool> is_tracked_by_cdc
-		{
-			get
-			{
-				return this._is_tracked_by_cdc;
-			}
-			set
-			{
-				if ((this._is_tracked_by_cdc != value))
-				{
-					this._is_tracked_by_cdc = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_lock_escalation", DbType="TinyInt")]
-		public System.Nullable<byte> lock_escalation
-		{
-			get
-			{
-				return this._lock_escalation;
-			}
-			set
-			{
-				if ((this._lock_escalation != value))
-				{
-					this._lock_escalation = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_lock_escalation_desc", DbType="NVarChar(60)")]
-		public string lock_escalation_desc
-		{
-			get
-			{
-				return this._lock_escalation_desc;
-			}
-			set
-			{
-				if ((this._lock_escalation_desc != value))
-				{
-					this._lock_escalation_desc = value;
-				}
-			}
-		}
 	}
 	
 	[Table(Name="sys.all_columns")]
@@ -1769,10 +1715,6 @@ namespace ProcedureGenerator.Core.DataAccess
 		private int _default_object_id;
 		
 		private int _rule_object_id;
-		
-		private System.Nullable<bool> _is_sparse;
-		
-		private System.Nullable<bool> _is_column_set;
 		
 		public all_column()
 		{
@@ -2142,38 +2084,6 @@ namespace ProcedureGenerator.Core.DataAccess
 				if ((this._rule_object_id != value))
 				{
 					this._rule_object_id = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_is_sparse", DbType="Bit")]
-		public System.Nullable<bool> is_sparse
-		{
-			get
-			{
-				return this._is_sparse;
-			}
-			set
-			{
-				if ((this._is_sparse != value))
-				{
-					this._is_sparse = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_is_column_set", DbType="Bit")]
-		public System.Nullable<bool> is_column_set
-		{
-			get
-			{
-				return this._is_column_set;
-			}
-			set
-			{
-				if ((this._is_column_set != value))
-				{
-					this._is_column_set = value;
 				}
 			}
 		}
