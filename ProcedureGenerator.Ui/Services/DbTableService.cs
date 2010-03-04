@@ -7,7 +7,7 @@ using ProcedureGenerator.Ui.Dto;
 
 namespace ProcedureGenerator.Ui.Services
 {
-	public class DbTableService
+	public class DbTableService : IDbTableService
 	{
 		public ObservableCollection<TableDto> GetTables(string connectionString)
 		{

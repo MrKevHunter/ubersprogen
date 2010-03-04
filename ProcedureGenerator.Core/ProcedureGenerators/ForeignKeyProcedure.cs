@@ -13,7 +13,7 @@ namespace ProcedureGenerator.Core.ProcedureGenerators
       {
          get
          {
-            return string.Format("sp{0}SelectBy{1}", Table.Name, Table.PrimaryKey);
+            return string.Format("sp{0}SelectBy{1}", Table.Name, _foreignKey);
          }
       }
 

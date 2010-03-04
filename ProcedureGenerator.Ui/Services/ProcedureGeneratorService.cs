@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using ProcedureGenerator.Core.DataAccess;
 using ProcedureGenerator.Core.Domain;
@@ -7,47 +8,45 @@ using ProcedureGenerator.Ui.ViewModel;
 
 namespace ProcedureGenerator.Ui.Services
 {
-	public class ProcedureGeneratorService
+	public class ProcedureGeneratorService : IProcedureGeneratorService
 	{
 		private MainViewModel _model;
 
-		public void GenerateProcedures(MainViewModel model, TableDto tableDto)
+		public IEnumerable<Procedure> GenerateProcedures(MainViewModel model, TableDto tableDto)
 		{
 			_model = model;
 			Table table = new TableBuilder().BuildMeATableFromThis(new SchemaDataContext(_model.ConnectionString),
 																		 tableDto.TableName);
 			if (model.Delete)
-				BuildAndWrite(table, new DeleteProcedure());
+				yield return BuildAndWrite(table, new DeleteProcedure());
 
 			if (model.Insert)
-				BuildAndWrite(table, new InsertProcedure());
+				yield return BuildAndWrite(table, new InsertProcedure());
 
 			if (model.Select)
-				BuildAndWrite(table, new SelectProcedure());
+				yield return BuildAndWrite(table, new SelectProcedure());
 
 			if (model.SelectById)
-				BuildAndWrite(table, new SelectByIdProcedure());
+				yield return BuildAndWrite(table, new SelectByIdProcedure());
 
 			if (model.SelectByFk)
-				BuildAndWrite(table, (IGenerateMultipleProcedure)new ForeignKeyProcedure());
+				foreach (var proc	 in BuildAndWrite(table, (IGenerateMultipleProcedure)new ForeignKeyProcedure()))
+				{
+					yield return proc;
+				}
 
 			if (model.Update)
-				BuildAndWrite(table, new UpdateProcedure());
+				yield return BuildAndWrite(table, new UpdateProcedure());
 		}
 
-		private void BuildAndWrite(Table table, IGenerateMultipleProcedure generator)
+		private IEnumerable<Procedure> BuildAndWrite(Table table, IGenerateMultipleProcedure generator)
 		{
-			
-			foreach (Procedure procedure in generator.GenerateProcedures(table, _model.GetProcedureConfig()))
-			{
-				File.WriteAllText(Path.Combine(_model.OutputPath, procedure.FileName), procedure.Body);
-			}
+			return generator.GenerateProcedures(table, _model.GetProcedureConfig());
 		}
 
-		private void BuildAndWrite(Table table, IGenerateProcedure generator)
+		private Procedure BuildAndWrite(Table table, IGenerateProcedure generator)
 		{
-			Procedure procedure = generator.Generate(table, _model.GetProcedureConfig());
-			File.WriteAllText(Path.Combine(_model.OutputPath, procedure.FileName), procedure.Body);
+			 return generator.Generate(table, _model.GetProcedureConfig());
 		}
 	}
 }

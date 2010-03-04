@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using ProcedureGenerator.Ui.Services;
 using ProcedureGenerator.Ui.View;
 using ProcedureGenerator.Ui.ViewModel;
 
@@ -21,7 +22,7 @@ namespace ProcedureGenerator.Ui
 
 			MainView window = new MainView();
 
-			var viewModel = new MainViewModel();
+			var viewModel = new MainViewModel(new DbTableService(), new ProcedureGeneratorService());
          
 			// Allow all controls in the window to 
 			// bind to the ViewModel by setting the 

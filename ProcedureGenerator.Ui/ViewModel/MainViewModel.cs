@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data.Linq;
 using System.Linq;
 using System.Windows;
 using ProcedureGenerator.Core.Domain;
@@ -15,11 +14,30 @@ namespace ProcedureGenerator.Ui.ViewModel
 {
 	public class MainViewModel : INotifyPropertyChanged
 	{
+		#region FileOutputType enum
+
+		public enum FileOutputType
+		{
+			Multiple,
+			Single
+		}
+
+		#endregion
+
 		private readonly BackgroundWorker _worker = new BackgroundWorker();
+
+		private readonly IDbTableService dbTableService;
+		private readonly IProcedureGeneratorService procedureGeneratorService;
 		private bool _inProgress;
 		private int _progressPercentage;
 
 		private ObservableCollection<TableDto> _tables = new ObservableCollection<TableDto>();
+
+		public MainViewModel(IDbTableService dbTableService, IProcedureGeneratorService procedureGeneratorService)
+		{
+			this.dbTableService = dbTableService;
+			this.procedureGeneratorService = procedureGeneratorService;
+		}
 
 		public ObservableCollection<TableDto> Tables
 		{
@@ -27,18 +45,13 @@ namespace ProcedureGenerator.Ui.ViewModel
 			set { _tables = value; }
 		}
 
-		public enum FileOutputType
-		{
-			Multiple,Single
-		}
-
-		public bool SetNoCountOn { get; set;}
+		public bool SetNoCountOn { get; set; }
 
 		public string ConnectionStringKey { get; set; }
 
 		public string OutputPath { get; set; }
 
-		public string IsolationLevel { get; set;}
+		public string IsolationLevel { get; set; }
 
 		public ObservableCollection<object> ConnectionStrings
 		{
@@ -95,7 +108,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public void GetListOfTablesFromDatabase()
 		{
-			new DbTableService().GetTables(ConnectionString).Each(x => Tables.Add(x));
+			dbTableService.GetTables(ConnectionString).Each(x => Tables.Add(x));
 		}
 
 		public void LoadTables(object sender, RoutedEventArgs e)
@@ -123,10 +136,10 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		private void CreateProcedureWorker(object s, DoWorkEventArgs args)
 		{
-
 			List<TableDto> tablesPresentations = Tables.Where(presentation => presentation.IsChecked).ToList();
 			int total = tablesPresentations.Count;
 			int count = 0;
+			var allOutputProcedures = new List<Procedure>();
 			foreach (TableDto tablesPresentation in tablesPresentations)
 			{
 				if (_worker.CancellationPending)
@@ -134,10 +147,12 @@ namespace ProcedureGenerator.Ui.ViewModel
 					args.Cancel = true;
 					return;
 				}
-				new ProcedureGeneratorService().GenerateProcedures(this, tablesPresentation);
+
+				allOutputProcedures.AddRange(procedureGeneratorService.GenerateProcedures(this, tablesPresentation));
 				count++;
-				_worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*100));
+				_worker.ReportProgress(Convert.ToInt32(((decimal) count/total)*75));
 			}
+			new FilePerProcedureWriter(OutputPath).WriteProcedures(allOutputProcedures);
 			_worker.ReportProgress(100);
 		}
 
@@ -164,7 +179,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public ProcedureConfiguration GetProcedureConfig()
 		{
-			return new ProcedureConfiguration(){SetNoCountOn = SetNoCountOn,IsolationLevel = IsolationLevel};
+			return new ProcedureConfiguration() {SetNoCountOn = SetNoCountOn, IsolationLevel = IsolationLevel};
 		}
 
 		public void CancelProcess(object sender, RoutedEventArgs e)
