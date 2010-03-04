@@ -113,6 +113,11 @@
     <Compile Include="Dto\ProcedureGenerator.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Services\DbTableService.cs" />
+    <Compile Include="Services\FilePerProcedureWriter.cs" />
+    <Compile Include="Services\IDbTableService.cs" />
+    <Compile Include="Services\IProcedureFileWriter.cs" />
+    <Compile Include="Services\IProcedureGeneratorService.cs" />
+    <Compile Include="Services\IProgressReporter.cs" />
     <Compile Include="Services\ProcedureGeneratorService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
