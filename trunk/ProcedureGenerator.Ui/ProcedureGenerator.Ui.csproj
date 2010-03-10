@@ -119,6 +119,7 @@
     <Compile Include="Services\IProcedureGeneratorService.cs" />
     <Compile Include="Services\IProgressReporter.cs" />
     <Compile Include="Services\ProcedureGeneratorService.cs" />
+    <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

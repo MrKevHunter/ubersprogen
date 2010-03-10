@@ -2,6 +2,7 @@
 AS
 
 	#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
+	
 
 	$procConfig.IsolationLevel
 

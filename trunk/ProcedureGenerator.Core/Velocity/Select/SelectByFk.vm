@@ -1,7 +1,9 @@
 ﻿CREATE PROCEDURE $owner.$procedureName (@$key as $key.ColumnType)
 AS
+BEGIN
 	$procConfig.IsolationLevel
-#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
+#if($procConfig.SetNoCountOn)		SET NOCOUNT ON #end
+
 	SELECT 
 		#set ($counter = 1)
 #foreach($i in $table.Columns)
@@ -12,4 +14,4 @@ AS
 	FROM $table.Schema.$table
 	WHERE $key = @$key
 
-GO
+END

@@ -2,10 +2,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:m="clr-namespace:Wpf.Controls;assembly=Wpf.SplitButton"
-        xmlns:Ui="clr-namespace:ProcedureGenerator.Ui" Title="Stored Procedure Generator"  MinHeight="292" MinWidth="715" Height="302">
+        xmlns:Ui="clr-namespace:ProcedureGenerator.Ui" xmlns:View="clr-namespace:ProcedureGenerator.Ui.View" Title="Stored Procedure Generator"  MinHeight="292" MinWidth="715" Height="302">
     <Window.Resources>
         <ResourceDictionary Source="../MainViewResourceDictionary.xaml" />
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static View:MainView.NoCountSetOn}" Executed="OnNoCountSetOn"/>
+        <CommandBinding Command="{x:Static View:MainView.NoCountSetOff}" Executed="OnNoCountSetOff"/>
+    </Window.CommandBindings>
 
     <DockPanel HorizontalAlignment="Stretch" >
         <DockPanel.Background>
@@ -77,8 +81,8 @@
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock>No Count</TextBlock>
-                                <RadioButton  x:Name="rdoNoCountOn" IsChecked="True"  Content="Set NoCount On"/>
-                                <RadioButton  x:Name="rdoNoCountOff"  Content="Set NoCount Off"/>
+                                <RadioButton  x:Name="rdoNoCountOn" IsChecked="True" Command="{x:Static View:MainView.NoCountSetOn}" Content="Set NoCount On"/>
+                                <RadioButton  x:Name="rdoNoCountOff" Command="{x:Static View:MainView.NoCountSetOff}" Content="Set NoCount Off"/>
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock>Transaction Isolation Level</TextBlock>

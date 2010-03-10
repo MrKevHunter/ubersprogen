@@ -1,6 +1,8 @@
 ﻿CREATE PROCEDURE $owner.$procedureName
 AS
-#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
+BEGIN
+#if($procConfig.SetNoCountOn)		SET NOCOUNT ON #end
+
 	$procConfig.IsolationLevel
 	SELECT 
 		#set ($counter = 1)
@@ -11,4 +13,4 @@ AS
 	#end
 	FROM $table.Schema.$table
 	
-GO
+END

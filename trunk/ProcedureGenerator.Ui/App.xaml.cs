@@ -28,6 +28,7 @@ namespace ProcedureGenerator.Ui
 			// bind to the ViewModel by setting the 
 			// DataContext, which propagates down 
 			// the element tree.
+			window.ViewModel = viewModel;
 			window.DataContext = viewModel;
 			window.btnLoadTables.Click += viewModel.LoadTables;
 			window.btnGenerate.Click += viewModel.GenerateStoredProcedures;

@@ -12,7 +12,7 @@ using ProcedureGenerator.Ui.Services;
 
 namespace ProcedureGenerator.Ui.ViewModel
 {
-	public class MainViewModel : INotifyPropertyChanged
+	public class MainViewModel : INotifyPropertyChanged, IMainViewModel
 	{
 		#region FileOutputType enum
 
@@ -37,6 +37,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 		{
 			this.dbTableService = dbTableService;
 			this.procedureGeneratorService = procedureGeneratorService;
+			SetNoCountOn = true;
 		}
 
 		public ObservableCollection<TableDto> Tables
