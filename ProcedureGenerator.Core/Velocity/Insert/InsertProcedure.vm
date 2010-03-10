@@ -3,7 +3,7 @@
 #set ($counter = 1)
 #foreach($i in $table.NonIdentityColumns)
 #each
-	@$i $i.ColumnType $i.Length #if($table.NumberOfNonIdentityColumns != $counter ) , #end
+	@$i $i.ColumnType $i.Length#if($table.NumberOfNonIdentityColumns != $counter ), #end
 	
 	#set ($counter = $counter + 1) 
 	#end
@@ -11,12 +11,14 @@
 	#set ($counter = 1)
 	)
 AS
+BEGIN
 	$procConfig.IsolationLevel
 	#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
+	
 	INSERT INTO $table.Schema.$table
 (
 #foreach($i in $table.NonIdentityColumns)
-	$i#if($table.NumberOfNonIdentityColumns != $counter ) , #end
+	$i#if($table.NumberOfNonIdentityColumns != $counter ), #end
 	#set ($counter = $counter + 1) 
 
 	#end
@@ -25,11 +27,11 @@ VALUES
 (
 	#set ($counter = 1)
 #foreach($i in $table.NonIdentityColumns)
-	@$i#if($table.NumberOfNonIdentityColumns != $counter ) , #end
+	@$i#if($table.NumberOfNonIdentityColumns != $counter ), #end
 	
 	#set ($counter = $counter + 1) 
 	#end
 	
 )
 	Select @$table.PrimaryKey = Scope_Identity()
-GO
+END
