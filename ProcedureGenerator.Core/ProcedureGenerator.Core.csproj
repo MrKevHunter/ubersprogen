@@ -89,7 +89,7 @@
     <Compile Include="Domain\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\TableBuilder.cs" />
-    <Compile Include="Velocity\ICommand.cs" />
+    <Compile Include="Velocity\ITextGenerator.cs" />
     <Compile Include="Velocity\VelocityProcedureGeneration.cs" />
   </ItemGroup>
   <ItemGroup>

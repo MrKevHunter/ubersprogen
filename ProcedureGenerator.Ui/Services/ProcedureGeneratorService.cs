@@ -37,6 +37,8 @@ namespace ProcedureGenerator.Ui.Services
 
 			if (model.Update)
 				yield return BuildAndWrite(table, new UpdateProcedure());
+
+			
 		}
 
 		private IEnumerable<Procedure> BuildAndWrite(Table table, IGenerateMultipleProcedure generator)

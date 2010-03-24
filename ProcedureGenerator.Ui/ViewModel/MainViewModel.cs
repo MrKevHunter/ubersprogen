@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using ProcedureGenerator.Core.Domain;
 using ProcedureGenerator.Ui.Dto;
 using ProcedureGenerator.Ui.Extensions;
@@ -14,6 +15,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 {
 	public class MainViewModel : INotifyPropertyChanged, IMainViewModel
 	{
+
 		#region FileOutputType enum
 
 		public enum FileOutputType
@@ -23,6 +25,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 		}
 
 		#endregion
+
 
 		private readonly BackgroundWorker _worker = new BackgroundWorker();
 
@@ -47,6 +50,10 @@ namespace ProcedureGenerator.Ui.ViewModel
 		}
 
 		public bool SetNoCountOn { get; set; }
+
+
+
+
 
 		public string ConnectionStringKey { get; set; }
 
