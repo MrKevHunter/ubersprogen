@@ -22,15 +22,9 @@ namespace ProcedureGenerator.Ui.Services
 				           	{
 				           		IsChecked = false,
 				           		TableName = table.TABLE_NAME,
-				           		HasPrimaryKey = false,
-				           		HasForeignKey = true
+									HasPrimaryKey = HasTableAPrimaryKey(table.TABLE_NAME, connectionString),
+									HasForeignKey = HasTableAnyForeignKeys(table.TABLE_NAME, connectionString)
 				           	});
-			}
-
-			foreach (var dto in tables)
-			{
-				dto.HasPrimaryKey = HasTableAPrimaryKey(dto.TableName,connectionString);
-				dto.HasForeignKey = HasTableAnyForeignKeys(dto.TableName, connectionString);
 			}
 
 			return tables;
