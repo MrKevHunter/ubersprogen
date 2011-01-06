@@ -9,9 +9,9 @@ namespace ProcedureGenerator.Ui.Dto
 		public static ProcedureGenerator Delete = new ProcedureGenerator("Delete",new DeleteProcedure());
 		public static ProcedureGenerator Insert = new ProcedureGenerator("Insert", new InsertProcedure());
 		public static ProcedureGenerator Update = new ProcedureGenerator("Update", new UpdateProcedure());
-		public static ProcedureGenerator Select = new ProcedureGenerator("Select", new SelectProcedure());
+		public static ProcedureGenerator Select = new ProcedureGenerator("SelectAll", new SelectProcedure());
 		public static ProcedureGenerator SelectById = new ProcedureGenerator("SelectById", new SelectByIdProcedure());
-		public static ProcedureGenerator SelectByFk = new ProcedureGenerator("Delete", new SelectByIdProcedure());
+		public static ProcedureGenerator SelectByFk = new ProcedureGenerator("SelectByFk", new SelectByIdProcedure());
 
 		public class ProcedureGenerator
 		{

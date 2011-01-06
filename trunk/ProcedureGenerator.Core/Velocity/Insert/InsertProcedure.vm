@@ -1,37 +1,37 @@
-﻿CREATE PROCEDURE $owner.$procedureName 
-(
+﻿CREATE PROCEDURE $owner.$procedureName(
 #set ($counter = 1)
 #foreach($i in $table.NonIdentityColumns)
 #each
-	@$i $i.ColumnType $i.Length#if($table.NumberOfNonIdentityColumns != $counter ), #end
-	
-	#set ($counter = $counter + 1) 
-	#end
-	,@$table.PrimaryKey $table.PrimaryKey.ColumnType  $table.PrimaryKey.Length OUTPUT
-	#set ($counter = 1)
+	@$i $i.ColumnType $i.Length#if($table.NumberOfNonIdentityColumns != $counter),
+#end
+#set ($counter = $counter + 1)
+#end,
+	@$table.PrimaryKey $table.PrimaryKey.ColumnType $table.PrimaryKey.Length OUTPUT
 	)
+#set ($counter = 1)
 AS
 BEGIN
-	$procConfig.IsolationLevel
-	#if($procConfig.SetNoCountOn) SET NOCOUNT ON #end
-	
-	INSERT INTO $table.Schema.$table
-(
-#foreach($i in $table.NonIdentityColumns)
-	$i#if($table.NumberOfNonIdentityColumns != $counter ), #end
-	#set ($counter = $counter + 1) 
+	#if($procConfig.SetNoCountOn)SET NOCOUNT ON#end
 
-	#end
+	$procConfig.IsolationLevel
+
+	INSERT INTO $table.Schema.$table
+	(
+	#foreach($i in $table.NonIdentityColumns)
+	$i#if($table.NumberOfNonIdentityColumns != $counter ), #end
+
+	#set ($counter = $counter + 1) 
+#end
 )
-VALUES
-(
+	VALUES
+	(
 	#set ($counter = 1)
 #foreach($i in $table.NonIdentityColumns)
 	@$i#if($table.NumberOfNonIdentityColumns != $counter ), #end
-	
+
 	#set ($counter = $counter + 1) 
-	#end
-	
+#end
 )
-	Select @$table.PrimaryKey = Scope_Identity()
+
+	SELECT @$table.PrimaryKey = Scope_Identity()
 END

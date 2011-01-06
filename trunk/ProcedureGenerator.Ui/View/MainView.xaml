@@ -30,13 +30,13 @@
                     <Button Height="23" HorizontalAlignment="Right" Margin="12,6,0,0" x:Name="btnLoadTables" VerticalAlignment="Top" Padding="10,2" Content="Load"/>
 
                 </StackPanel>
-                <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <m:SplitButton x:Name="btnSelect" Height="23" Content="Select All..." Placement="Bottom">
+                <StackPanel DockPanel.Dock="Bottom" Height="36" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <m:SplitButton x:Name="btnSelect" Height="28" Content="Select All..." Placement="Bottom" VerticalAlignment="Center">
                         <MenuItem x:Name="btnSelectAllWithPk" Header="Select All With PK"/>
                         <MenuItem x:Name="btnSelectAllWithFk" Header="Select All With FK"/>
                         <MenuItem x:Name="btnSelectAllWithAny" Header="Select All With Any Key"/>
                     </m:SplitButton>
-                    <Button Height="23"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Center"  Padding="10,3"  HorizontalAlignment="Right" Content="Select None"/>
+                    <Button Height="28"  Margin="45,5,10,5" x:Name="btnSelectNone" VerticalAlignment="Stretch"  Padding="10,3"  HorizontalAlignment="Stretch" Content="Select None" HorizontalContentAlignment="Stretch" IsCancel="False" VerticalContentAlignment="Top" />
                 </StackPanel>
                 <ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding Tables}" IsSynchronizedWithCurrentItem="True" x:Name="lbTables" HorizontalAlignment="Stretch"  Margin="5,5,5,0" >
                     <ListBox.ItemTemplate>
