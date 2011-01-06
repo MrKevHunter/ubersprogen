@@ -16,5 +16,7 @@ namespace ProcedureGenerator.Core.Domain
 			}
 			set { isolationLevel = value; }
 		}
+
+		public string Schema { get; set; }
 	}
 }

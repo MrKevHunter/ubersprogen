@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE $owner.$procedureName (@$key as $key.ColumnType)
+﻿CREATE PROCEDURE $procConfig.Schema.$procedureName (@$key as $key.ColumnType)
 AS
 BEGIN
 #if($procConfig.SetNoCountOn)	SET NOCOUNT ON#end

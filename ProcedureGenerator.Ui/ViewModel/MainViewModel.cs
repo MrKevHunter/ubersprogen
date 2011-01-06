@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using ProcedureGenerator.Core.Domain;
 using ProcedureGenerator.Ui.Dto;
 using ProcedureGenerator.Ui.Extensions;
@@ -51,15 +50,18 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public bool SetNoCountOn { get; set; }
 
-
-
-
-
 		public string ConnectionStringKey { get; set; }
 
 		public string OutputPath { get; set; }
 
 		public string IsolationLevel { get; set; }
+
+		private string schema = "dbo";
+		public string Schema
+		{
+			get { return schema; }
+			set { schema = value; }
+		}
 
 		public ObservableCollection<object> ConnectionStrings
 		{
@@ -187,7 +189,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 
 		public ProcedureConfiguration GetProcedureConfig()
 		{
-			return new ProcedureConfiguration() {SetNoCountOn = SetNoCountOn, IsolationLevel = IsolationLevel};
+			return new ProcedureConfiguration {SetNoCountOn = SetNoCountOn, IsolationLevel = IsolationLevel, Schema = Schema};
 		}
 
 		public void CancelProcess(object sender, RoutedEventArgs e)

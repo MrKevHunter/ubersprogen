@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE $owner.$procedureName(
+﻿CREATE PROCEDURE $procConfig.Schema.$procedureName(
 #set ($counter = 1)
 #foreach($i in $table.NonIdentityColumns)
 #each

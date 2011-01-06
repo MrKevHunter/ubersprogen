@@ -93,7 +93,9 @@
                                     <ComboBoxItem>SNAPSHOT</ComboBoxItem>
                                     <ComboBoxItem>SERIALIZABLE</ComboBoxItem>
                                 </ComboBox>
-                            </StackPanel>
+								<TextBlock Height="13.277" Width="129.847">Schema</TextBlock>
+								<TextBox Height="19.277" Name="schema" Text="{Binding Schema}" />
+							</StackPanel>
                         </StackPanel>
                     </Border>
                     <Border Grid.Row="1">

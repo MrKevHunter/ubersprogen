@@ -1,5 +1,5 @@
 ﻿#set ($counter = 1)
-CREATE PROCEDURE $owner.$procedureName 
+CREATE PROCEDURE $procConfig.Schema.$procedureName 
 (#foreach($i in $table.NonIdentityColumns)
 
 	@$i $i.ColumnType$i.Length#if($table.NumberOfNonIdentityColumns != $counter ), #end

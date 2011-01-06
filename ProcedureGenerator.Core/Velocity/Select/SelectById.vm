@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE $owner.$procedureName
+﻿CREATE PROCEDURE $procConfig.Schema.$procedureName
 (
 	@primaryKey as $table.PrimaryKey.ColumnType
 )

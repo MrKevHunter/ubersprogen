@@ -13,6 +13,7 @@ namespace ProcedureGenerator.Ui.ViewModel
 		string ConnectionStringKey { get; set; }
 		string OutputPath { get; set; }
 		string IsolationLevel { get; set; }
+		string Schema { get; set; }
 		ObservableCollection<object> ConnectionStrings { get; }
 		bool InProgress { get; set; }
 		int ProgressPercentage { get; set; }
