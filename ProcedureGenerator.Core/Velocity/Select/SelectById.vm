@@ -1,18 +1,20 @@
-﻿CREATE PROCEDURE $owner.$procedureName (@primaryKey as $table.PrimaryKey.ColumnType)
+﻿CREATE PROCEDURE $owner.$procedureName
+(
+	@primaryKey as $table.PrimaryKey.ColumnType
+)
 AS
 BEGIN
+#if($procConfig.SetNoCountOn)	SET NOCOUNT ON#end
+
 	$procConfig.IsolationLevel
-	
-#if($procConfig.SetNoCountOn)		SET NOCOUNT ON #end
 
 	SELECT 
-		#set ($counter = 1)
+	#set ($counter = 1)
 #foreach($i in $table.Columns)
 	$i#if($table.NumberOfColumns != $counter ), #end
-	
-	#set ($counter = $counter + 1) 
-	#end
-	FROM $table.Schema.$table
-	WHERE $table.PrimaryKey = @primaryKey
 
+	#set ($counter = $counter + 1) 
+#end
+FROM $table.Schema.$table
+	WHERE $table.PrimaryKey = @primaryKey
 END

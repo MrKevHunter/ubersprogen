@@ -1,16 +1,16 @@
 ﻿CREATE PROCEDURE $owner.$procedureName
 AS
 BEGIN
-#if($procConfig.SetNoCountOn)		SET NOCOUNT ON #end
+#if($procConfig.SetNoCountOn)	SET NOCOUNT ON #end
 
 	$procConfig.IsolationLevel
+
 	SELECT 
-		#set ($counter = 1)
+	#set ($counter = 1)
 #foreach($i in $table.Columns)
 	$i#if($table.NumberOfColumns != $counter ), #end
 	
 	#set ($counter = $counter + 1) 
-	#end
-	FROM $table.Schema.$table
-	
+#end
+FROM $table.Schema.$table
 END
