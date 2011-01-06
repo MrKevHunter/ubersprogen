@@ -4,5 +4,12 @@ AS
 
 	$procConfig.IsolationLevel
 
-	DELETE FROM $table.Schema.$table WHERE $table.PrimaryKey = @primaryKey
+	IF (@primaryKey IS NOT NULL)
+	BEGIN
+		DELETE FROM $table.Schema.$table WHERE $table.PrimaryKey = @primaryKey
+	END
+	ELSE
+	BEGIN
+		TRUNCATE TABLE $table.Schema.$table
+	END
 GO
